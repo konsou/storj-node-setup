@@ -50,7 +50,7 @@ echo
 
 HDD_VENDOR=$(./get-vendor.sh "${TARGET_DEVICE}")
 HDD_SERIAL_LAST_4=$(./get-serial-last-4.sh  "${TARGET_DEVICE}")
-DEVICE_NAME="${HDD_VENDOR}-${HDD_SERIAL_LAST_4}"
-echo "Device name is ${DEVICE_NAME}"
-MOUNT_POINT="${MOUNT_DIR_BASE}/${DEVICE_NAME}"
+NODE_NAME="${HDD_VENDOR}-${HDD_SERIAL_LAST_4}"
+echo "Node name is ${NODE_NAME}"
+MOUNT_POINT="${MOUNT_DIR_BASE}/${NODE_NAME}"
 echo "Mount point is ${MOUNT_POINT}"
