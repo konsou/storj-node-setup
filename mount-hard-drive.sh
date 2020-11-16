@@ -36,11 +36,11 @@ done
 echo
 # sudo sfdisk --delete "${TARGET_DEVICE}" --backup
 sudo wipefs --all --force "${TARGET_DEVICE}"
-if [ $? -ne 0 ]; then exit
+if [ $? -ne 0 ]; then exit; fi
 echo
 echo "type=83" | sudo sfdisk "${TARGET_DEVICE}"  # create linux type partition
-if [ $? -ne 0 ]; then exit
+if [ $? -ne 0 ]; then exit; fi
 echo
 sudo mkfs.ext4 -F "${TARGET_PARTITION}"
-if [ $? -ne 0 ]; then exit
+if [ $? -ne 0 ]; then exit; fi
 echo
