@@ -1,4 +1,4 @@
-!#/usr/bin/bash
+#!/usr/bin/bash
 
 # SETTINGS
 MOUNT_DIR=/user-mounts
