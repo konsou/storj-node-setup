@@ -38,7 +38,7 @@ done
 
 # MODIFY FILESYSTEM
 echo
-sudo umount "${TARGET_DEVICE}?*" # umount all partitions of the device
+ ls "${TARGET_DEVICE}"* | sudo xargs -n1 umount -l  # umount all partitions of the device
 # sudo sfdisk --delete "${TARGET_DEVICE}" --backup
 sudo wipefs --all --force "${TARGET_DEVICE}"
 if [ $? -ne 0 ]; then exit 2; fi
