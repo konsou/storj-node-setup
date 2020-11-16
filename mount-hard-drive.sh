@@ -48,8 +48,8 @@ TARGET_PARTITION_UUID=$(sudo blkid -o value -s UUID /dev/sdb1)
 echo "UUID for created partition is ${TARGET_PARTITION_UUID}"
 echo
 
-HDD_VENDOR=$(./get-vendor.sh)
-HDD_SERIAL_LAST_4=$(./get-serial-last.4.sh)
+HDD_VENDOR=$(./get-vendor.sh "${TARGET_DEVICE}")
+HDD_SERIAL_LAST_4=$(./get-serial-last.4.sh  "${TARGET_DEVICE}")
 DEVICE_NAME="${HDD_VENDOR}-${HDD_SERIAL_LAST_4}"
 echo "Device name is ${DEVICE_NAME}"
 MOUNT_POINT="${MOUNT_DIR_BASE}/${DEVICE_NAME}"
