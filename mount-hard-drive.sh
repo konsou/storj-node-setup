@@ -22,7 +22,9 @@ do
                 if [[ "${USER_INPUT_2}" == "y" || "${USER_INPUT_2}" == "Y" ]]
                 then
                         TARGET_DEVICE="${USER_INPUT}"
-                        echo "${TARGET_DEVICE}" selected
+                        TARGET_PARTITION="${TARGET_DEVICE}1"
+                        echo "Device ${TARGET_DEVICE}" selected
+                        echo "Partition ${TARGET_PARTITION}" selected
                         VALID_INPUT=1
                 fi
         else
@@ -36,5 +38,5 @@ sudo sfdisk --delete "${TARGET_DEVICE}" --backup
 echo
 echo "type=20" | sudo sfdisk "${TARGET_DEVICE}"  # create linux type partition
 echo
-sudo mkfs.ext4 -F "${TARGET_DEVICE}"
+sudo mkfs.ext4 -F "${TARGET_PARTITION}"
 echo
