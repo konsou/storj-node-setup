@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # SETTINGS
-MOUNT_DIR=/user-mounts
+MOUNT_DIR_BASE=/user-mounts
 
 VALID_INPUT=0
 while [ "$VALID_INPUT" -eq "0" ]
@@ -46,3 +46,11 @@ if [ $? -ne 0 ]; then exit 2; fi
 echo
 TARGET_PARTITION_UUID=$(sudo blkid -o value -s UUID /dev/sdb1)
 echo "UUID for created partition is ${TARGET_PARTITION_UUID}"
+echo
+
+HDD_VENDOR=$(./get-vendor.sh)
+HDD_SERIAL_LAST_4=$(./get-serial-last.4.sh)
+DEVICE_NAME="${HDD_VENDOR}-${HDD_SERIAL_LAST_4}"
+echo "Device name is ${DEVICE_NAME}"
+MOUNT_POINT="${MOUNT_DIR_BASE}/${DEVICE_NAME}"
+echo "Mount point is ${MOUNT_POINT}"
