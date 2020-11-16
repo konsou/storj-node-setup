@@ -83,7 +83,10 @@ echo "Unmount"
 sudo umount "${MOUNT_POINT}"
 if [ $? -ne 0 ]; then exit 2; fi
 echo "Write fstab"
-echo "UUID=${TARGET_PARTITION_UUID} ${MOUNT_POINT} ext4 nosuid,nodev,nofail,x-gvfs-show  0  2"
+sudo echo "UUID=${TARGET_PARTITION_UUID} ${MOUNT_POINT} ext4 nosuid,nodev,nofail,x-gvfs-show  0  2" >> /etc/fstab
+if [ $? -ne 0 ]; then exit 2; fi
+sudo mount -av
+if [ $? -ne 0 ]; then exit 2; fi
 
 
 
