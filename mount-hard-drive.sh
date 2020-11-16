@@ -3,18 +3,21 @@
 # SETTINGS
 MOUNT_DIR=/user-mounts
 
-echo "Here are connected hard drives for this machine:"
-echo
-lsblk
-
 VALID_INPUT=0
 while [ "$VALID_INPUT" -eq "0" ]
 do
+        echo
+        echo "Here are connected hard drives for this machine:"
+        echo
+        lsblk
+        echo
         read -p "Type device to format for Storj (eg. sdf): " USER_INPUT
+        echo
         USER_INPUT="/dev/${USER_INPUT}"
         sudo sfdisk -l "${USER_INPUT}"
         if [ $? -eq 0 ]  # command succeeded
         then
+                echo
                 read -p "Use this device? SELECTING Y WILL DELETE EVERYTHING ON IT! (y/n): " USER_INPUT_2
                 if [[ "${USER_INPUT_2}" == "y" || "${USER_INPUT_2}" == "Y" ]]
                 then
