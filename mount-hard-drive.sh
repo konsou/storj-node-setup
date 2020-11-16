@@ -7,7 +7,7 @@ VALID_INPUT=0
 while [ "$VALID_INPUT" -eq "0" ]
 do
         echo
-        echo "Here are connected hard drives for this machine:"
+        echo "Here are the connected hard drives for this machine:"
         echo
         lsblk
         echo
@@ -31,10 +31,10 @@ do
 
 done
 
-if [ -z "$TARGET_DEVICE" ]
-then
-    echo "Please specify the device to mount"
-    exit 1
-else
-    echo "Using device ${TARGET_DEVICE}"
-fi
+echo
+sudo sfdisk --delete "${TARGET_DEVICE}" --backup
+echo
+echo "type=83" | sudo sfdisk "${TARGET_DEVICE}"  # create linux type partition
+echo
+sudo mkfs.ext4 -F "${TARGET_DEVICE}"
+echo
