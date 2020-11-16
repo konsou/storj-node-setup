@@ -37,7 +37,7 @@ echo
 # sudo sfdisk --delete "${TARGET_DEVICE}" --backup
 sudo wipefs --all --force "${TARGET_DEVICE}"
 echo
-echo "type=L" | sudo sfdisk "${TARGET_DEVICE}"  # create linux type partition
+echo "type=0FC63DAF-8483-4772-8E79-3D69D8477DE4" | sudo sfdisk "${TARGET_DEVICE}"  # create linux type partition
 echo
 sudo mkfs.ext4 -F "${TARGET_PARTITION}"
 echo
