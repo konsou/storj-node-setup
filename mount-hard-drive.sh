@@ -34,7 +34,7 @@ done
 echo
 sudo sfdisk --delete "${TARGET_DEVICE}" --backup
 echo
-echo "type=83" | sudo sfdisk "${TARGET_DEVICE}"  # create linux type partition
+echo "type=20" | sudo sfdisk "${TARGET_DEVICE}"  # create linux type partition
 echo
 sudo mkfs.ext4 -F "${TARGET_DEVICE}"
 echo
