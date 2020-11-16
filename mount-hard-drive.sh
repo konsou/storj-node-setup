@@ -44,3 +44,5 @@ echo
 sudo mkfs.ext4 -F "${TARGET_PARTITION}"
 if [ $? -ne 0 ]; then exit 2; fi
 echo
+TARGET_PARTITION_UUID=$(blkid -o value -s UUID /dev/sdb1)
+echo "UUID for created partition is ${TARGET_PARTITION_UUID}"
