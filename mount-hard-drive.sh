@@ -3,6 +3,7 @@
 # SETTINGS
 MOUNT_DIR_BASE=/user-mounts
 
+# SELECT DEVICE
 VALID_INPUT=0
 while [ "$VALID_INPUT" -eq "0" ]
 do
@@ -33,6 +34,7 @@ do
 
 done
 
+# MODIFY FILESYSTEM
 echo
 # sudo sfdisk --delete "${TARGET_DEVICE}" --backup
 sudo wipefs --all --force "${TARGET_DEVICE}"
@@ -48,6 +50,7 @@ TARGET_PARTITION_UUID=$(sudo blkid -o value -s UUID /dev/sdb1)
 echo "UUID for created partition is ${TARGET_PARTITION_UUID}"
 echo
 
+# GENERATE NODE NAME FROM DRIVE VENDOR AND SN
 HDD_VENDOR=$(./get-vendor.sh "${TARGET_DEVICE}")
 HDD_SERIAL_LAST_4=$(./get-serial-last-4.sh  "${TARGET_DEVICE}")
 NODE_NAME="${HDD_VENDOR}-${HDD_SERIAL_LAST_4}"
