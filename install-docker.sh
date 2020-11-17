@@ -51,7 +51,7 @@ sudo docker run hello-world
 echo
 echo "Add ${USER} to docker group"
 echo
-sudo groupadd docker || true # don't exit if this fails (group may already exist)
+# sudo groupadd docker || true # don't exit if this fails (group may already exist)
 sudo usermod -aG docker $USER
 
 newgrp docker
