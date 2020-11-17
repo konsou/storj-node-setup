@@ -82,6 +82,8 @@ if [ $? -ne 0 ]; then exit 2; fi
 echo "Unmount"
 sudo umount "${MOUNT_POINT}"
 if [ $? -ne 0 ]; then exit 2; fi
+# Remove reserved space (unneeded for data partition)
+sudo tune2fs -m 0 "${TARGET_PARTITION}"
 echo "Write fstab"
 # Use tee --append - "echo >> file" doesn't work with sudo rights!
 # no output needed (file contents) -> redirecto to /dev/null
