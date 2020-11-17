@@ -92,5 +92,3 @@ if [ $? -ne 0 ]; then exit 2; fi
 sudo mount -av
 if [ $? -ne 0 ]; then exit 2; fi
 
-
-
