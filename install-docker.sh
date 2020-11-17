@@ -50,7 +50,6 @@ echo
 echo "Add ${USER} to docker group"
 echo
 sudo groupadd docker
-if [ $? -ne 0 ]; then exit 2; fi
 sudo usermod -aG docker $USER
 if [ $? -ne 0 ]; then exit 2; fi
 
