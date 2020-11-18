@@ -17,6 +17,14 @@ then
     exit 1
 fi
 
+# Node space calculation script is in Python
+if [ $(dpkg-query -W -f='${Status}' python3 2>/dev/null | grep -c "ok installed") -eq 0 ]
+then
+    echo "Installing python3"
+    sudo apt update
+    sudo apt -y install python3
+fi
+
 
 # Port numbers and other needed info
 read -p "Enter external Storj port to use: " PORT
@@ -42,7 +50,7 @@ DOCKER_RUN_COMMAND='docker run -d --restart unless-stopped --stop-timeout 300 \
     -e WALLET="${WALLET_ADDRESS}" \
     -e EMAIL="${EMAIL_ADDRESS}" \
     -e ADDRESS="${WEB_ADDRESS}:${PORT}" \
-    -e STORAGE="2TB" \
-    --mount type=bind,source="<identity-dir>",destination=/app/identity \
-    --mount type=bind,source="<storage-dir>",destination=/app/config \
+    -e STORAGE="${AVAILABLE_SPACE}" \
+    --mount type=bind,source="${MOUNT_POINT}/identity",destination=/app/identity \
+    --mount type=bind,source="${MOUNT_POINT}/storagenode",destination=/app/config \
     --name storagenode storjlabs/storagenode:latest'
