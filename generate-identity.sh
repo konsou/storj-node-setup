@@ -40,4 +40,4 @@ then
     chmod +x "${IDENTITY_EXECUTABLE_DIR}/identity"
 fi
 
-"${IDENTITY_EXECUTABLE_DIR}/identity" create storagenode --identity-dir "${IDENTITY_DIR}"
+"${IDENTITY_EXECUTABLE_DIR}/identity create storagenode --identity-dir ${IDENTITY_DIR}"
