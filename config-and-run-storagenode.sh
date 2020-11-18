@@ -25,6 +25,9 @@ read -p "Enter wallet address: " WALLET_ADDRESS
 read -p "Enter email address: " EMAIL_ADDRESS
 read -p "Enter external ip or web address: " WEB_ADDRESS
 
+TOTAL_SPACE=$(df ${MOUNT_POINT} --output='avail' --block-size=TB | grep 'TB')
+AVAILABLE_SPACE=$(./calculate-node-space.py "${TOTAL_SPACE}")
+
 # CREATE NEEDED DIRS
 echo "Create ${MOUNT_POINT}/storagenode"
 mkdir -p "${MOUNT_POINT}/storagenode"
