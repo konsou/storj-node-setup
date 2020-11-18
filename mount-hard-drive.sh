@@ -65,7 +65,7 @@ if [ $? -ne 0 ]; then exit 2; fi
 
 # MOUNTING
 echo "Creating mount point"
-mkdir -p "${MOUNT_POINT}"
+sudo mkdir -p "${MOUNT_POINT}"
 if [ $? -ne 0 ]; then exit 2; fi
 echo "Test mount"
 sudo mount -U "${TARGET_PARTITION_UUID}" "${MOUNT_POINT}"
