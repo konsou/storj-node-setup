@@ -4,7 +4,7 @@
 # exit when any command fails
 set -e
 
-# MOUNT_POINT and IDENTITY_DIR must be set!
+# MOUNT_POINT, IDENTITY_DIR and NODE_NAME must be set!
 if [ -z "${MOUNT_POINT}" ]
 then
     echo "MOUNT_POINT must be set"
@@ -14,6 +14,12 @@ fi
 if [ -z "${IDENTITY_DIR}" ]  # directory where the signed identity is
 then
     echo "IDENTITY_DIR must be set"
+    exit 1
+fi
+
+if [ -z "${NODE_NAME}" ]
+then
+    echo "NODE_NAME must be set"
     exit 1
 fi
 
@@ -54,6 +60,6 @@ DOCKER_RUN_COMMAND="docker run -d --restart unless-stopped --stop-timeout 300 \
     -e STORAGE="${AVAILABLE_SPACE}" \
     --mount type=bind,source="${MOUNT_POINT}/identity",destination=/app/identity \
     --mount type=bind,source="${MOUNT_POINT}/storagenode",destination=/app/config \
-    --name storagenode storjlabs/storagenode:latest"
+    --name "storagenode-${NODE_NAME}" storjlabs/storagenode:latest"
 
 echo "${DOCKER_RUN_COMMAND}"
