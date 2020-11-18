@@ -37,14 +37,15 @@ TOTAL_SPACE=$(df ${MOUNT_POINT} --output='avail' --block-size=TB | grep 'TB')
 AVAILABLE_SPACE=$(./calculate-node-space.py "${TOTAL_SPACE}")
 
 # CREATE NEEDED DIRS
+# UNCOMMENT THESE!!
 echo "Create ${MOUNT_POINT}/storagenode"
-mkdir -p "${MOUNT_POINT}/storagenode"
+# mkdir -p "${MOUNT_POINT}/storagenode"
 echo "Move identity to ${MOUNT_POINT}"
-mv "${IDENTITY_DIR}" "${MOUNT_POINT}"
+# mv "${IDENTITY_DIR}" "${MOUNT_POINT}"
 
 docker pull storjlabs/storagenode:latest
 
-DOCKER_RUN_COMMAND='docker run -d --restart unless-stopped --stop-timeout 300 \
+DOCKER_RUN_COMMAND="docker run -d --restart unless-stopped --stop-timeout 300 \
     -p ${PORT}:28967 \
     -p ${DASHBOARD_PORT}:14002 \
     -e WALLET="${WALLET_ADDRESS}" \
@@ -53,4 +54,4 @@ DOCKER_RUN_COMMAND='docker run -d --restart unless-stopped --stop-timeout 300 \
     -e STORAGE="${AVAILABLE_SPACE}" \
     --mount type=bind,source="${MOUNT_POINT}/identity",destination=/app/identity \
     --mount type=bind,source="${MOUNT_POINT}/storagenode",destination=/app/config \
-    --name storagenode storjlabs/storagenode:latest'
+    --name storagenode storjlabs/storagenode:latest"
