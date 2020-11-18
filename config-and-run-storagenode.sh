@@ -52,7 +52,7 @@ AVAILABLE_SPACE=$(./calculate-node-space.py "${TOTAL_SPACE}")
 echo "Create ${MOUNT_POINT}/storagenode"
 mkdir -p "${MOUNT_POINT}/storagenode"
 echo "Move identity to ${MOUNT_POINT}"
-# mv "${IDENTITY_DIR}" "${MOUNT_POINT}"
+mv "${IDENTITY_DIR}" "${MOUNT_POINT}"
 
 docker pull storjlabs/storagenode:latest
 
@@ -75,7 +75,8 @@ cat "${DOCKER_RUN_SCRIPT}"
 read -p "PRESS ENTER TO CONTINUE IF THIS COMMAND LOOKS RIGHT. CTRL-C TO EXIT OTHERWISE."
 
 echo "Running docker run command"
-# "${DOCKER_RUN_SCRIPT}"
+chmod +x "${DOCKER_RUN_SCRIPT}"
+"${DOCKER_RUN_SCRIPT}"
 
 echo "Setting up watchtower"
 echo "Remove old watchtower - errors are ok here"
