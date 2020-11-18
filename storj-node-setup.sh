@@ -20,7 +20,8 @@ read -p "Generate identity now? (y/n): " USER_INPUT
 
 echo "Using identity directory ${IDENTITY_DIR}"
 
-# sign identity here
+# Authorize identity here
+source ./authorize-identity.sh
 
 
 # SELECT DEVICE
