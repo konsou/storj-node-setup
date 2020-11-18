@@ -39,9 +39,9 @@ read -p "Enter wallet address: " WALLET_ADDRESS
 read -p "Enter email address: " EMAIL_ADDRESS
 read -p "Enter external ip or web address: " WEB_ADDRESS
 
-echo "STATIC IP AND PORT FORWARDING MUST BE SET TO CONTINUE. PRESS ENTER IF THAT IS DONE."
-echo "Current IP is: "
+echo "Current IPs are: "
 hostname -I
+echo "STATIC IP AND PORT FORWARDING MUST BE SET TO CONTINUE. PRESS ENTER IF THAT IS DONE."
 read
 
 
