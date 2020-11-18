@@ -37,24 +37,13 @@ do
         fi
 
 done
+
 # exit when any command fails
 set -e
 
-# MODIFY FILESYSTEM
-echo
-# umount all partitions of the device
-# || true -> don't exit if this fails (partition not mounted)
-ls "${TARGET_DEVICE}"* | sudo xargs -n1 umount -l || true  
-# sudo sfdisk --delete "${TARGET_DEVICE}" --backup
-sudo wipefs --all --force "${TARGET_DEVICE}"
-echo
-echo "type=83" | sudo sfdisk "${TARGET_DEVICE}"  # create linux type partition
-echo
-sudo mkfs.ext4 -F "${TARGET_PARTITION}"
-echo
-TARGET_PARTITION_UUID=$(sudo blkid -o value -s UUID "${TARGET_PARTITION}")
-echo "UUID for created partition is ${TARGET_PARTITION_UUID}"
-echo
+# TARGET_DEVICE and TARGET_PARTITION must be set for this script
+# This scritp sets TARGET_PARTITION_UUID variable
+./partition-and-format-disk.sh
 
 # GENERATE NODE NAME FROM DRIVE VENDOR AND SN
 HDD_VENDOR=$(./get-vendor.sh "${TARGET_DEVICE}")
