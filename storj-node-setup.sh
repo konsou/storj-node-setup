@@ -8,7 +8,9 @@ IDENTITY_EXECUTABLE_DIR=./identity-executable
 IDENTITY_DIR=./identity
 
 echo "BEFORE YOU BEGIN"
-echo "You need to have an auth token from https://registration.storj.io/"
+echo "  -you need to have an auth token from https://registration.storj.io/"
+echo "  -your server must have a static IP set"
+echo "  -Storj port must have been opened in the router"
 echo
 read -p "Generate identity now? (y/n): " USER_INPUT
         if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" ]]
