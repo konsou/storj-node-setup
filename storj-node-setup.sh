@@ -43,7 +43,7 @@ set -e
 
 # TARGET_DEVICE and TARGET_PARTITION must be set for this script
 # This script sets TARGET_PARTITION_UUID variable
-./partition-and-format-disk.sh "${TARGET_DEVICE}" "${TARGET_PARTITION}"
+source ./partition-and-format-disk.sh "${TARGET_DEVICE}" "${TARGET_PARTITION}"
 if [ -z "${TARGET_PARTITION_UUID}" ]
 then
     echo "Didn't get TARGET_PARTITION_UUID from partition-and-format-disk.sh"
