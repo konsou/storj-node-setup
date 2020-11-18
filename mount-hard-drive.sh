@@ -18,6 +18,7 @@ do
         echo
         USER_INPUT="/dev/${USER_INPUT}"
         sudo sfdisk -l "${USER_INPUT}"
+        echo
         sudo lsblk -o name,size,type,label,mountpoint "${USER_INPUT}"
         if [ $? -eq 0 ]  # command succeeded
         then
