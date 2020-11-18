@@ -18,6 +18,8 @@ read -p "Generate identity now? (y/n): " USER_INPUT
                 read -p "Enter identity directory path: " IDENTITY_DIR
         fi
 
+echo "Using identity directory ${IDENTITY_DIR}"
+
 # sign identity here
 
 
