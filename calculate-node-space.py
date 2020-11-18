@@ -4,14 +4,14 @@ import sys
 def print_usage_help():
     print(f"Usage: {sys.argv[0]} TOTAL_SPACE")
     print(f"eg. {sys.argv[0]} 2TB")
-    print("Space should be in TB.")
+    print(f"Space should be in TB.")
 
 def main():
     # USER INPUT SHOULD BE IN TB!
     try:
         user_input = sys.argv[1].strip()
     except IndexError:
-        print("ERROR: No total storage space given.")
+        print(f"ERROR: No total storage space given.")
         print_usage_help()
         sys.exit(1)
 
@@ -20,7 +20,7 @@ def main():
     try:
         total_space = float(total_space)
     except ValueError:
-        print("ERROR: Invalid storage space given ({sys.argv[1]}).")
+        print(f"ERROR: Invalid storage space given ({sys.argv[1]}).")
         print_usage_help()
         sys.exit(1)
 
