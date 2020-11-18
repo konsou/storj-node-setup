@@ -27,8 +27,8 @@ fi
 
 
 # Port numbers and other needed info
-read -p "Enter external Storj port to use: " PORT
-read -p "Enter external dashboard port to use: " DASHBOARD_PORT
+read -p "Enter external Storj port to use (default is 28967): " PORT
+read -p "Enter external dashboard port to use (default is 14002): " DASHBOARD_PORT
 read -p "Enter wallet address: " WALLET_ADDRESS
 read -p "Enter email address: " EMAIL_ADDRESS
 read -p "Enter external ip or web address: " WEB_ADDRESS
@@ -55,3 +55,5 @@ DOCKER_RUN_COMMAND="docker run -d --restart unless-stopped --stop-timeout 300 \
     --mount type=bind,source="${MOUNT_POINT}/identity",destination=/app/identity \
     --mount type=bind,source="${MOUNT_POINT}/storagenode",destination=/app/config \
     --name storagenode storjlabs/storagenode:latest"
+
+echo "${DOCKER_RUN_COMMAND}"
