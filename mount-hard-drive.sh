@@ -86,3 +86,5 @@ echo "Write fstab"
 echo "UUID=${TARGET_PARTITION_UUID} ${MOUNT_POINT} ext4 nosuid,nodev,nofail,x-gvfs-show  0  2" | sudo tee --append /etc/fstab > /dev/null
 sudo mount -av
 
+# INSTALL DOCKER
+./install-docker.sh
