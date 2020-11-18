@@ -23,13 +23,6 @@ echo "Using identity directory ${IDENTITY_DIR}"
 # Authorize identity here
 source ./authorize-identity.sh
 
-# Port numbers and other needed info
-read -p "Enter external Storj port to use: " PORT
-read -p "Enter external dashboard port to use: " DASHBOARD_PORT
-read -p "Enter wallet address: " WALLET_ADDRESS
-read -p "Enter email address: " EMAIL_ADDRESS
-read -p "Enter external ip or web address: " WEB_ADDRESS
-
 # SELECT DEVICE
 VALID_INPUT=0
 while [ "$VALID_INPUT" -eq "0" ]
@@ -109,9 +102,8 @@ sudo mount -av
 # INSTALL DOCKER
 ./install-docker.sh
 
-# CREATE NEEDED DIRS
-mkdir -p "${MOUNT_POINT}/storagenode"
-mkdir -p "${MOUNT_POINT}/identity"
+# CONFIG AND RUN STORAGENODE
+source ./config-and-run-storagenode.sh
 
 
 
