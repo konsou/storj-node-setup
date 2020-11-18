@@ -51,15 +51,16 @@ sudo docker run hello-world
 echo
 echo "Add ${USER} to docker group"
 echo
-# sudo groupadd docker || true # don't exit if this fails (group may already exist)
 sudo usermod -aG docker $USER
+# sudo groupadd docker || true # don't exit if this fails (group may already exist)
 
-newgrp docker
 echo
 echo "Test docker as regular user"
 echo
+newgrp docker << END
 # Test #2 - as a regular user
 docker run hello-world
+END
 
 echo
 echo "DOCKER SUCCESFULLY INSTALLED"
