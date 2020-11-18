@@ -42,4 +42,4 @@ then
     chmod +x "${IDENTITY_EXECUTABLE_DIR}/identity"
 fi
 
-"${IDENTITY_EXECUTABLE_DIR}/identity authorize storagenode ${AUTH_TOKEN} --identity-dir ${IDENTITY_DIR}"
+"${IDENTITY_EXECUTABLE_DIR}/identity" authorize storagenode "${AUTH_TOKEN}" --identity-dir "${IDENTITY_DIR}"
