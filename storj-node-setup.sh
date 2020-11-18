@@ -7,23 +7,31 @@ MOUNT_DIR_BASE=/user-mounts
 IDENTITY_EXECUTABLE_DIR=./identity-executable
 IDENTITY_DIR=./identity
 
+CURRENT_IPS=$(hostname -I)
+
 echo "BEFORE YOU BEGIN"
 echo "  -you need to have an auth token from https://registration.storj.io/"
-echo "  -your server must have a static IP set"
+echo "  -your server must have a static IP set (current IPs: ${CURRENT_IPS})"
 echo "  -Storj port must have been opened in the router"
 echo
 read -p "Generate identity now? (y/n): " USER_INPUT
-        if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" ]]
-        then
-                source ./generate-identity.sh
-        else
-                read -p "Enter identity directory path: " IDENTITY_DIR
-        fi
+if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" ]]
+then
+        source ./generate-identity.sh
+else
+        read -p "Enter identity directory path: " IDENTITY_DIR
+fi
 
 echo "Using identity directory ${IDENTITY_DIR}"
 
 # Authorize identity here
-source ./authorize-identity.sh
+read -p "Do we need to authorize the identity? (y/n): " USER_INPUT
+if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" ]]
+then
+        source ./authorize-identity.sh
+else
+        echo "Skipping identity authorization"
+fi
 
 # SELECT DEVICE
 VALID_INPUT=0

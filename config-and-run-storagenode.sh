@@ -39,6 +39,12 @@ read -p "Enter wallet address: " WALLET_ADDRESS
 read -p "Enter email address: " EMAIL_ADDRESS
 read -p "Enter external ip or web address: " WEB_ADDRESS
 
+echo "STATIC IP AND PORT FORWARDING MUST BE SET TO CONTINUE. PRESS ENTER IF THAT IS DONE."
+echo "Current IP is: "
+hostname -I
+read
+
+
 TOTAL_SPACE=$(df ${MOUNT_POINT} --output='avail' --block-size=TB | grep 'TB')
 AVAILABLE_SPACE=$(./calculate-node-space.py "${TOTAL_SPACE}")
 
@@ -63,3 +69,17 @@ DOCKER_RUN_COMMAND="docker run -d --restart unless-stopped --stop-timeout 300 \
     --name "storagenode-${NODE_NAME}" storjlabs/storagenode:latest"
 
 echo "${DOCKER_RUN_COMMAND}"
+
+read -p "PRESS ENTER TO CONTINUE IF THIS COMMAND LOOKS RIGHT. CTRL-C TO EXIT OTHERWISE."
+
+echo "Running docker run command"
+"${DOCKER_RUN_COMMAND}"
+
+echo "Setting up watchtower"
+echo "Remove old watchtower - errors are ok here"
+docker stop watchtower || true
+docker rm watchtower || true
+
+docker pull storjlabs/watchtower
+echo "Run watchtower"
+docker run -d --restart=always --name watchtower -v /var/run/docker.sock:/var/run/docker.sock storjlabs/watchtower --stop-timeout 300s
