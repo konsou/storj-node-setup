@@ -6,10 +6,12 @@ set -e
 echo
 echo "Generating Storj identity"
 echo
-curl -L https://github.com/storj/storj/releases/latest/download/identity_linux_amd64.zip -o identity_linux_amd64.zip
+mkdir -p ./identity-executable
+curl -L https://github.com/storj/storj/releases/latest/download/identity_linux_amd64.zip -o ./identity-executable/identity_linux_amd64.zip
 sudo apt update
 sudo apt -y install unzip
-unzip -o identity_linux_amd64.zip
-chmod +x ./identity
+unzip -o ./identity-executable/identity_linux_amd64.zip -d ./identity-executable
+chmod +x ./identity-executable/identity
 
-./identity create storagenode --identity-dir ./identity
+mkdir -p ./identity
+./identity-executable/identity create storagenode --identity-dir ./identity
