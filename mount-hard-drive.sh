@@ -36,18 +36,18 @@ do
 
 done
 
+# exit when any command fails
+set -e
+
 # MODIFY FILESYSTEM
 echo
  ls "${TARGET_DEVICE}"* | sudo xargs -n1 umount -l  # umount all partitions of the device
 # sudo sfdisk --delete "${TARGET_DEVICE}" --backup
 sudo wipefs --all --force "${TARGET_DEVICE}"
-if [ $? -ne 0 ]; then exit 2; fi
 echo
 echo "type=83" | sudo sfdisk "${TARGET_DEVICE}"  # create linux type partition
-if [ $? -ne 0 ]; then exit 2; fi
 echo
 sudo mkfs.ext4 -F "${TARGET_PARTITION}"
-if [ $? -ne 0 ]; then exit 2; fi
 echo
 TARGET_PARTITION_UUID=$(sudo blkid -o value -s UUID "${TARGET_PARTITION}")
 echo "UUID for created partition is ${TARGET_PARTITION_UUID}"
@@ -61,34 +61,25 @@ echo "Node name is ${NODE_NAME}"
 MOUNT_POINT="${MOUNT_DIR_BASE}/${NODE_NAME}"
 echo "Mount point is ${MOUNT_POINT}"
 sudo e2label "${TARGET_PARTITION}" "${NODE_NAME}"
-if [ $? -ne 0 ]; then exit 2; fi
 
 # MOUNTING
 echo "Creating mount point"
 sudo mkdir -p "${MOUNT_POINT}"
-if [ $? -ne 0 ]; then exit 2; fi
 echo "Test mount"
 sudo mount -U "${TARGET_PARTITION_UUID}" "${MOUNT_POINT}"
-if [ $? -ne 0 ]; then exit 2; fi
 echo "Set owner to ${USER}:$(id -gn)"
 sudo chown -R "${USER}:$(id -gn)" "${MOUNT_POINT}"
-if [ $? -ne 0 ]; then exit 2; fi
 echo "Test file write"
 echo "test" > "${MOUNT_POINT}/test.txt"
-if [ $? -ne 0 ]; then exit 2; fi
 echo "Remove test file"
 rm "${MOUNT_POINT}/test.txt"
-if [ $? -ne 0 ]; then exit 2; fi
 echo "Unmount"
 sudo umount "${MOUNT_POINT}"
-if [ $? -ne 0 ]; then exit 2; fi
 # Remove reserved space (unneeded for data partition)
 sudo tune2fs -m 0 "${TARGET_PARTITION}"
 echo "Write fstab"
 # Use tee --append - "echo >> file" doesn't work with sudo rights!
 # no output needed (file contents) -> redirecto to /dev/null
 echo "UUID=${TARGET_PARTITION_UUID} ${MOUNT_POINT} ext4 nosuid,nodev,nofail,x-gvfs-show  0  2" | sudo tee --append /etc/fstab > /dev/null
-if [ $? -ne 0 ]; then exit 2; fi
 sudo mount -av
-if [ $? -ne 0 ]; then exit 2; fi
 
