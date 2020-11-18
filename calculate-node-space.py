@@ -24,7 +24,7 @@ def main():
         print_usage_help()
         sys.exit(1)
 
-    storage_available = user_input / 1.1
+    storage_available = total_space / 1.1
     print(f"{storage_available:.2f}TB")
 
 if __name__ == "__main__":
