@@ -66,7 +66,7 @@ echo "    -e WALLET="${WALLET_ADDRESS}" \\" >> "${DOCKER_RUN_SCRIPT}"
 echo "    -e EMAIL="${EMAIL_ADDRESS}" \\" >> "${DOCKER_RUN_SCRIPT}"
 echo "    -e ADDRESS="${WEB_ADDRESS}:${PORT}" \\" >> "${DOCKER_RUN_SCRIPT}"
 echo "    -e STORAGE="${AVAILABLE_SPACE}" \\" >> "${DOCKER_RUN_SCRIPT}"
-echo "    --mount type=bind,source="${MOUNT_POINT}/identity",destination=/app/identity \\" >> "${DOCKER_RUN_SCRIPT}"
+echo "    --mount type=bind,source="${MOUNT_POINT}/identity/storagenode",destination=/app/identity \\" >> "${DOCKER_RUN_SCRIPT}"
 echo "    --mount type=bind,source="${MOUNT_POINT}/storagenode",destination=/app/config \\" >> "${DOCKER_RUN_SCRIPT}"
 echo "    --name "storagenode-${NODE_NAME}" storjlabs/storagenode:latest" >> "${DOCKER_RUN_SCRIPT}"
 
