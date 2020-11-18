@@ -52,27 +52,30 @@ AVAILABLE_SPACE=$(./calculate-node-space.py "${TOTAL_SPACE}")
 echo "Create ${MOUNT_POINT}/storagenode"
 mkdir -p "${MOUNT_POINT}/storagenode"
 echo "Move identity to ${MOUNT_POINT}"
-mv "${IDENTITY_DIR}" "${MOUNT_POINT}"
+# mv "${IDENTITY_DIR}" "${MOUNT_POINT}"
 
 docker pull storjlabs/storagenode:latest
 
-DOCKER_RUN_COMMAND="docker run -d --restart unless-stopped --stop-timeout 300 \
-    -p ${PORT}:28967 \
-    -p ${DASHBOARD_PORT}:14002 \
-    -e WALLET="${WALLET_ADDRESS}" \
-    -e EMAIL="${EMAIL_ADDRESS}" \
-    -e ADDRESS="${WEB_ADDRESS}:${PORT}" \
-    -e STORAGE="${AVAILABLE_SPACE}" \
-    --mount type=bind,source="${MOUNT_POINT}/identity",destination=/app/identity \
-    --mount type=bind,source="${MOUNT_POINT}/storagenode",destination=/app/config \
-    --name "storagenode-${NODE_NAME}" storjlabs/storagenode:latest"
+DOCKER_RUN_SCRIPT=./docker-run.sh
+# #!/bin/bash NEEDS TO BE IN SINGLE QUOTES TO WORK
+echo '#!/bin/bash' > "${DOCKER_RUN_SCRIPT}"
+echo "docker run -d --restart unless-stopped --stop-timeout 300 \\" >> "${DOCKER_RUN_SCRIPT}"
+echo "    -p ${PORT}:28967 \\" >> "${DOCKER_RUN_SCRIPT}"
+echo "    -p ${DASHBOARD_PORT}:14002 \\" >> "${DOCKER_RUN_SCRIPT}"
+echo "    -e WALLET="${WALLET_ADDRESS}" \\" >> "${DOCKER_RUN_SCRIPT}"
+echo "    -e EMAIL="${EMAIL_ADDRESS}" \\" >> "${DOCKER_RUN_SCRIPT}"
+echo "    -e ADDRESS="${WEB_ADDRESS}:${PORT}" \\" >> "${DOCKER_RUN_SCRIPT}"
+echo "    -e STORAGE="${AVAILABLE_SPACE}" \\" >> "${DOCKER_RUN_SCRIPT}"
+echo "    --mount type=bind,source="${MOUNT_POINT}/identity",destination=/app/identity \\" >> "${DOCKER_RUN_SCRIPT}"
+echo "    --mount type=bind,source="${MOUNT_POINT}/storagenode",destination=/app/config \\" >> "${DOCKER_RUN_SCRIPT}"
+echo "    --name "storagenode-${NODE_NAME}" storjlabs/storagenode:latest" >> "${DOCKER_RUN_SCRIPT}"
 
-echo "${DOCKER_RUN_COMMAND}"
+cat "${DOCKER_RUN_SCRIPT}"
 
 read -p "PRESS ENTER TO CONTINUE IF THIS COMMAND LOOKS RIGHT. CTRL-C TO EXIT OTHERWISE."
 
 echo "Running docker run command"
-"${DOCKER_RUN_COMMAND}"
+# "${DOCKER_RUN_SCRIPT}"
 
 echo "Setting up watchtower"
 echo "Remove old watchtower - errors are ok here"
