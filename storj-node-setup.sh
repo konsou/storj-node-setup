@@ -10,9 +10,12 @@ IDENTITY_DIR=./identity
 CURRENT_IPS=$(hostname -I)
 
 echo "BEFORE YOU BEGIN"
-echo "  -you need to have an auth token from https://registration.storj.io/"
-echo "  -your server must have a static IP set (current IPs: ${CURRENT_IPS})"
-echo "  -Storj port must have been opened in the router"
+echo "Identity - you need one of these:"
+echo "  -an auth token from https://registration.storj.io/ OR"
+echo "  -an authorized identity"
+echo
+echo "-your server must have a static IP set (current IPs: ${CURRENT_IPS})"
+echo "-Storj port must have been opened in the router"
 echo
 read -p "Generate identity now? (y/n): " USER_INPUT
 if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" ]]
