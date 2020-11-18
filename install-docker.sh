@@ -7,6 +7,16 @@ echo
 echo "INSTALLING DOCKER"
 echo
 
+if [[ \
+    $(dpkg-query -W -f='${Status}' docker-ce 2>/dev/null | grep -c "ok installed") -eq 1 && \
+    $(dpkg-query -W -f='${Status}' docker-ce-cli 2>/dev/null | grep -c "ok installed") -eq 1 && \
+    $(dpkg-query -W -f='${Status}' containerd.io 2>/dev/null | grep -c "ok installed") -eq 1 \
+]]
+then
+    echo "Docker already installed"
+    exit 0
+fi
+
 echo "Install prerequisites"
 echo
 sudo apt update
