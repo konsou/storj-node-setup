@@ -2,6 +2,10 @@
 # RUN THIS SCRIPT AS A NORMAL USER
 # WILL SUDO WHEN NEEDED
 
+echo "BEFORE YOU BEGIN"
+echo "You need to have an auth token from https://registration.storj.io/"
+echo
+
 # SETTINGS
 MOUNT_DIR_BASE=/user-mounts
 
