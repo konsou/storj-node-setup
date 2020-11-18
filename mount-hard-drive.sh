@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # RUN THIS SCRIPT AS A NORMAL USER
 # WILL SUDO WHEN NEEDED
 
