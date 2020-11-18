@@ -12,12 +12,13 @@ do
         echo
         echo "Here are the connected hard drives for this machine:"
         echo
-        lsblk
+        sudo lsblk -o name,size,type,label,mountpoint
         echo
         read -p "Type device to format for Storj (eg. sdf): " USER_INPUT
         echo
         USER_INPUT="/dev/${USER_INPUT}"
         sudo sfdisk -l "${USER_INPUT}"
+        sudo lsblk -o name,size,type,label,mountpoint "${USER_INPUT}"
         if [ $? -eq 0 ]  # command succeeded
         then
                 echo
