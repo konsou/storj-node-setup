@@ -43,6 +43,7 @@ set -e
 
 # TARGET_DEVICE and TARGET_PARTITION must be set for this script
 # This scritp sets TARGET_PARTITION_UUID variable
+#
 ./partition-and-format-disk.sh
 
 # GENERATE NODE NAME FROM DRIVE VENDOR AND SN
