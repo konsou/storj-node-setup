@@ -23,6 +23,9 @@ echo "Using identity directory ${IDENTITY_DIR}"
 # Authorize identity here
 source ./authorize-identity.sh
 
+# Port numbers
+read -p "Enter external Storj port to use: " PORT
+read -p "Enter external dashboard port to use: " DASHBOARD_PORT
 
 # SELECT DEVICE
 VALID_INPUT=0
@@ -102,3 +105,5 @@ sudo mount -av
 
 # INSTALL DOCKER
 ./install-docker.sh
+
+
