@@ -37,13 +37,14 @@ do
         fi
 
 done
-
 # exit when any command fails
 set -e
 
 # MODIFY FILESYSTEM
 echo
- ls "${TARGET_DEVICE}"* | sudo xargs -n1 umount -l  # umount all partitions of the device
+# umount all partitions of the device
+# || true -> don't exit if this fails (partition not mounted)
+ls "${TARGET_DEVICE}"* | sudo xargs -n1 umount -l || true  
 # sudo sfdisk --delete "${TARGET_DEVICE}" --backup
 sudo wipefs --all --force "${TARGET_DEVICE}"
 echo
