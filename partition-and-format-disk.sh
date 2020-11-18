@@ -1,5 +1,8 @@
 #!/bin/bash
 
+TARGET_DEVICE=$1
+TARGET_PARTITION=$2
+
 # TARGET_DEVICE and TARGET_PARTITION must be set!
 if [ -z "${TARGET_DEVICE}" ]
 then
@@ -42,3 +45,5 @@ echo
 TARGET_PARTITION_UUID=$(sudo blkid -o value -s UUID "${TARGET_PARTITION}")
 echo "UUID for created partition is ${TARGET_PARTITION_UUID}"
 echo
+export TARGET_PARTITION_UUID="${TARGET_PARTITION_UUID}"
+exit 0
