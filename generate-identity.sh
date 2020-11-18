@@ -1,10 +1,22 @@
 #!/bin/bash
 
+# source THIS SCRIPT!
+
 # exit when any command fails
 set -e
 
-IDENTITY_EXECUTABLE_DIR=./identity-executable
-IDENTITY_DIR=./identity
+# IDENTITY_DIR and IDENTITY_EXECUTABLE_DIR must be set!
+if [ -z "${IDENTITY_DIR}" ]
+then
+    echo "IDENTITY_DIR must be set"
+    exit 1
+fi
+
+if [ -z "${IDENTITY_EXECUTABLE_DIR}" ]
+then
+    echo "IDENTITY_EXECUTABLE_DIR must be set"
+    exit 1
+fi
 
 echo
 echo "Generating Storj identity"

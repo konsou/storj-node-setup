@@ -2,21 +2,24 @@
 # RUN THIS SCRIPT AS A NORMAL USER
 # WILL SUDO WHEN NEEDED
 
+# SETTINGS
+MOUNT_DIR_BASE=/user-mounts
+IDENTITY_EXECUTABLE_DIR=./identity-executable
+IDENTITY_DIR=./identity
+
 echo "BEFORE YOU BEGIN"
 echo "You need to have an auth token from https://registration.storj.io/"
 echo
 read -p "Generate identity now? (y/n): " USER_INPUT
         if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" ]]
         then
-                ./generate-identity.sh
+                source ./generate-identity.sh
         else
-                read -p "Enter identity path: " IDENTITY_PATH
+                read -p "Enter identity directory path: " IDENTITY_DIR
         fi
 
 # sign identity here
 
-# SETTINGS
-MOUNT_DIR_BASE=/user-mounts
 
 # SELECT DEVICE
 VALID_INPUT=0
