@@ -3,7 +3,13 @@ import sys
 
 def main():
     # USER INPUT SHOULD BE IN TB!
-    user_input = float(sys.argv[1].strip())
+    try:
+        user_input = float(sys.argv[1].strip())
+    except IndexError:
+        print("ERROR: No total storage space given.")
+        print(f"Usage: {sys.argv[0]} TOTAL_SPACE")
+        print("Space should be in TB.")
+        sys.exit(1)
     storage_available = user_input / 1.1
     print(f"{storage_available:.2f}TB")
 
