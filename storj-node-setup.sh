@@ -118,6 +118,14 @@ sudo mount -av
 # CONFIG AND RUN STORAGENODE
 source ./config-and-run-storagenode.sh
 
+echo 
+echo "NODE SETUP COMPLETE!"
+echo
+echo "Final steps:"
+echo "    -check that the web dashboard works"
+echo "    -set up monitoring at uptimerobot.com"
+echo
+
 
 
 
