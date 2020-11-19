@@ -1,10 +1,6 @@
 #!/bin/bash
 
-# source THIS SCRIPT!
-
-
-# TARGET_DEVICE=$1
-# TARGET_PARTITION=$2
+# source this script!
 
 # TARGET_DEVICE and TARGET_PARTITION must be set!
 if [ -z "${TARGET_DEVICE}" ]
