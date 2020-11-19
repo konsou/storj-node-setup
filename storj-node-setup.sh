@@ -34,7 +34,10 @@ fi
 echo "Using identity directory ${IDENTITY_DIR}"
 
 # Authorize identity here
-read -p "Do we need to authorize the identity? (y/n): " USER_INPUT
+echo "Do we need to authorize the identity?"
+echo "AUTHORIZED IDENTITY IS REQUIRED, ONLY SELECT NO"
+echo "IF YOU'VE AUTHORIZED THE IDENTITY BEFOREHAND"
+read -p  "(y/n): " USER_INPUT
 if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" ]]
 then
         source ./authorize-identity.sh
