@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # source this script!
+# THIS SCRIPT SETS TARGET_PARTITION_UUID VARIABLE
 
 # TARGET_DEVICE and TARGET_PARTITION must be set!
 if [ -z "${TARGET_DEVICE}" ]
@@ -14,9 +15,6 @@ then
     echo "TARGET_PARTITION must be set"
     exit 1
 fi
-
-# THIS SCRIPT SETS TARGET_PARTITION_UUID VARIABLE
-
 # exit when any command fails
 set -e
 
