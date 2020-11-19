@@ -113,10 +113,11 @@ echo "Remove test file"
 rm "${MOUNT_POINT}/test.txt"
 echo "Unmount"
 sudo umount "${MOUNT_POINT}"
-echo "Write fstab"
+echo "Write mount settings to fstab for automatic mounting on startup"
 # Use tee --append - "echo >> file" doesn't work with sudo rights!
 # no output needed (file contents) -> redirecto to /dev/null
 echo "UUID=${TARGET_PARTITION_UUID} ${MOUNT_POINT} ext4 nosuid,nodev,nofail,x-gvfs-show  0  2" | sudo tee --append /etc/fstab > /dev/null
+echo "Reload fstab settings"
 sudo mount -av
 
 # INSTALL DOCKER
