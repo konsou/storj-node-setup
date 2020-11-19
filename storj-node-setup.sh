@@ -10,12 +10,18 @@ IDENTITY_DIR=./identity
 CURRENT_IPS=$(hostname -I)
 
 echo "BEFORE YOU BEGIN"
+echo
 echo "Identity - you need one of these:"
 echo "  -an auth token from https://registration.storj.io/ OR"
 echo "  -an authorized identity"
 echo
 echo "-your server must have a static IP set (current IPs: ${CURRENT_IPS})"
-echo "-Storj port must have been opened in the router"
+echo "-Storj port must have been opened and redirected to this machine in the router"
+echo
+echo "It's not a good idea to generate an identity on a Raspberry Pi or"
+echo "other hardware that's not powerful because it will take forever."
+echo "It's better to generate an identity on your main computer."
+echo "Identity generation guide: https://documentation.storj.io/dependencies/identity"
 echo
 read -p "Generate identity now? (y/n): " USER_INPUT
 if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" ]]
