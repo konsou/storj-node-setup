@@ -55,6 +55,7 @@ mv "${IDENTITY_DIR}" "${MOUNT_POINT}"
 
 docker pull storjlabs/storagenode:latest
 
+# GENERATE DOCKER RUN SCRIPT
 DOCKER_RUN_SCRIPT=./docker-run.sh
 # #!/bin/bash NEEDS TO BE IN SINGLE QUOTES TO WORK
 echo '#!/bin/bash' > "${DOCKER_RUN_SCRIPT}"
@@ -69,15 +70,18 @@ echo "    --mount type=bind,source="${MOUNT_POINT}/identity/storagenode",destina
 echo "    --mount type=bind,source="${MOUNT_POINT}/storagenode",destination=/app/config \\" >> "${DOCKER_RUN_SCRIPT}"
 echo "    --name "storagenode-${NODE_NAME}" storjlabs/storagenode:latest" >> "${DOCKER_RUN_SCRIPT}"
 
+echo
+echo "GENERATED DOCKER RUN COMMAND:"
+echo
 cat "${DOCKER_RUN_SCRIPT}"
-
+echo
 read -p "PRESS ENTER TO CONTINUE IF THIS COMMAND LOOKS RIGHT. CTRL-C TO EXIT OTHERWISE."
 
 echo "Running docker run command"
 chmod +x "${DOCKER_RUN_SCRIPT}"
 "${DOCKER_RUN_SCRIPT}"
 
-echo "Setting up watchtower"
+echo "Setting up watchtower for automatic docker image updates"
 echo "Remove old watchtower - errors are ok here"
 docker stop watchtower || true
 docker rm watchtower || true
