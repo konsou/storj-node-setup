@@ -24,6 +24,10 @@ echo "It's better to generate an identity on your main computer."
 echo "Identity generation guide: https://documentation.storj.io/dependencies/identity"
 echo
 read -p "Generate identity now? (y/n): " USER_INPUT
+
+echo "Update APT in case we need to install some packages"
+sudo apt update
+
 if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" ]]
 then
         source ./generate-identity.sh
@@ -80,9 +84,6 @@ done
 
 # exit when any command fails
 set -e
-
-echo "Update APT in case we need to install some packages"
-sudo apt update
 
 # TARGET_DEVICE and TARGET_PARTITION must be set for this script
 # This script sets TARGET_PARTITION_UUID variable
