@@ -81,6 +81,9 @@ done
 # exit when any command fails
 set -e
 
+echo "Update APT in case we need to install some packages"
+sudo apt update
+
 # TARGET_DEVICE and TARGET_PARTITION must be set for this script
 # This script sets TARGET_PARTITION_UUID variable
 source ./partition-and-format-disk.sh "${TARGET_DEVICE}" "${TARGET_PARTITION}"

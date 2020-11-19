@@ -1,5 +1,5 @@
 #!/bin/bash
-# source THIS SCRIPT!
+# source this script!
 
 # exit when any command fails
 set -e
@@ -27,7 +27,6 @@ fi
 if [ $(dpkg-query -W -f='${Status}' python3 2>/dev/null | grep -c "ok installed") -eq 0 ]
 then
     echo "Installing python3"
-    sudo apt update
     sudo apt -y install python3
 fi
 
