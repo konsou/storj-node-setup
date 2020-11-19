@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# source THIS SCRIPT!
+# source this script!
 
 # exit when any command fails
 set -e
@@ -20,6 +20,7 @@ fi
 
 echo
 echo "Generating Storj identity"
+echo "THIS WILL TAKE SOME TIME DEPENDING ON YOUR CPU POWER"
 echo
 echo "Creating directories if needed"
 mkdir -p "${IDENTITY_EXECUTABLE_DIR}"
@@ -32,7 +33,6 @@ then
     if [ $(dpkg-query -W -f='${Status}' unzip 2>/dev/null | grep -c "ok installed") -eq 0 ]
     then
         echo "Installing unzip"
-        sudo apt update
         sudo apt -y install unzip
     fi
 
