@@ -120,6 +120,11 @@ echo "test" > "${MOUNT_POINT}/test.txt"
 echo "Remove test file"
 rm "${MOUNT_POINT}/test.txt"
 echo "Unmount"
+echo
+echo "IF THIS COMMAND FAILS:"
+echo "    -remove the line starting with ${TARGET_PARTITION_UUID} from /etc/fstab"
+echo "    -reboot the computer"
+echo
 sudo umount "${MOUNT_POINT}"
 echo "Write mount settings to fstab for automatic mounting on startup"
 # Use tee --append - "echo >> file" doesn't work with sudo rights!
