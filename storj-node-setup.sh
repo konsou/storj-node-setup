@@ -25,8 +25,10 @@ echo "Identity generation guide: https://documentation.storj.io/dependencies/ide
 echo
 read -p "Generate identity now? (y/n): " USER_INPUT
 
+echo
 echo "Update APT in case we need to install some packages"
 sudo apt update
+echo
 
 if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" ]]
 then
