@@ -44,6 +44,8 @@ echo
 echo "Format the new partition"
 echo
 sudo mkfs.ext4 -F "${TARGET_PARTITION}"
+# Remove reserved space (unneeded for data partition)
+sudo tune2fs -m 0 "${TARGET_PARTITION}"
 echo
 TARGET_PARTITION_UUID=$(sudo blkid -o value -s UUID "${TARGET_PARTITION}")
 echo "UUID for created partition is ${TARGET_PARTITION_UUID}"
