@@ -130,8 +130,8 @@ echo
 echo "NODE SETUP COMPLETE!"
 echo
 echo "Final steps:"
-echo "    -check that the web dashboard works"
-echo "    -set up monitoring at uptimerobot.com"
+echo "    -check that the web dashboard works and that the node is online"
+echo "    -set up monitoring at eg. uptimerobot.com"
 echo
 
 
