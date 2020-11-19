@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# source THIS SCRIPT!
+# source this script!
 
 # exit when any command fails
 set -e
@@ -34,7 +34,6 @@ then
     if [ $(dpkg-query -W -f='${Status}' unzip 2>/dev/null | grep -c "ok installed") -eq 0 ]
     then
         echo "Installing unzip"
-        sudo apt update
         sudo apt -y install unzip
     fi
 
