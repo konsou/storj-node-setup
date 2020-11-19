@@ -46,6 +46,10 @@ read
 
 TOTAL_SPACE=$(df ${MOUNT_POINT} --output='avail' --block-size=TB | grep 'TB')
 AVAILABLE_SPACE=$(./calculate-node-space.py "${TOTAL_SPACE}")
+echo
+echo "Total space available on device: ${TOTAL_SPACE}"
+echo "Space available for Storj after reserving recommended 10%: ${AVAILABLE_SPACE}"
+echo
 
 # CREATE NEEDED DIRS
 echo "Create ${MOUNT_POINT}/storagenode"
