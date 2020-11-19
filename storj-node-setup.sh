@@ -41,6 +41,7 @@ fi
 echo "Using identity directory ${IDENTITY_DIR}"
 
 # Authorize identity here
+echo
 echo "Do we need to authorize the identity?"
 echo "AUTHORIZED IDENTITY IS REQUIRED, ONLY SELECT NO"
 echo "IF YOU'VE AUTHORIZED THE IDENTITY BEFOREHAND"
