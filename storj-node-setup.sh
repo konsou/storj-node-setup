@@ -9,6 +9,7 @@ IDENTITY_DIR=./identity
 
 CURRENT_IPS=$(hostname -I)
 
+echo
 echo "BEFORE YOU BEGIN"
 echo
 echo "Identity - you need one of these:"
