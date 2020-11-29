@@ -1,0 +1,1 @@
+* Redirect logs to file: https://documentation.storj.io/resources/faq/redirect-logs
