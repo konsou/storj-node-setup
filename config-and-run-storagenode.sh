@@ -59,6 +59,23 @@ mv "${IDENTITY_DIR}" "${MOUNT_POINT}"
 
 docker pull storjlabs/storagenode:latest
 
+# GENERATE DOCKER SETUP SCRIPT
+DOCKER_SETUP_SCRIPT=./docker-run.sh
+# #!/bin/bash NEEDS TO BE IN SINGLE QUOTES TO WORK
+echo '#!/bin/bash' > "${DOCKER_SETUP_SCRIPT}"
+echo "docker run --rm -e SETUP='true' \\" >> "${DOCKER_SETUP_SCRIPT}"
+echo "    --mount type=bind,source="${MOUNT_POINT}/identity/storagenode",destination=/app/identity \\" >> "${DOCKER_SETUP_SCRIPT}"
+echo "    --mount type=bind,source="${MOUNT_POINT}/storagenode",destination=/app/config \\" >> "${DOCKER_SETUP_SCRIPT}"
+echo "    --name "storagenode-${NODE_NAME}" storjlabs/storagenode:latest" >> "${DOCKER_SETUP_SCRIPT}"
+
+echo
+echo "GENERATED DOCKER SETUP COMMAND:"
+echo
+cat "${DOCKER_SETUP_SCRIPT}"
+echo
+read -p "PRESS ENTER TO CONTINUE IF THIS COMMAND LOOKS RIGHT. CTRL-C TO EXIT OTHERWISE."
+
+
 # GENERATE DOCKER RUN SCRIPT
 DOCKER_RUN_SCRIPT=./docker-run.sh
 # #!/bin/bash NEEDS TO BE IN SINGLE QUOTES TO WORK
