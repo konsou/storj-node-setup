@@ -2,6 +2,10 @@
 
 ## A script to help setting up your Storj node on Linux / Docker
 
+## NOTE! I HAVEN'T TESTED YET AFTER ADDING THE NEW SETUP='true' DOCKER COMMAND!
+
+## NOTE! CURRENTLY ONLY WORKS ON UBUNTU!
+
 ## Features
 * can generate an identity for you (optional)
 * can authorize your pregenerated identity (optional)
