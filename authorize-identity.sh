@@ -28,4 +28,8 @@ read -p "Enter auth token: " AUTH_TOKEN
 
 source ./download-identity-executable.sh
 
+echo "IF THIS STEP FAILS: CHECK THAT YOUR IDENTITY DIRECTORY"
+echo "CONTAINS A SUBDIRECTORY NAMED 'storagenode' THAT HAS"
+echo "THE IDENTITY FILES"
+echo
 "${IDENTITY_EXECUTABLE_DIR}/identity" authorize storagenode "${AUTH_TOKEN}" --identity-dir "${IDENTITY_DIR}"
