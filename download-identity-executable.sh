@@ -18,6 +18,12 @@ mkdir -p "${IDENTITY_EXECUTABLE_DIR}"
 if [ ! -e "${IDENTITY_EXECUTABLE_DIR}/identity" ]
 then
     echo "Downloading identity executable"
+    if [ $(dpkg-query -W -f='${Status}' curl 2>/dev/null | grep -c "ok installed") -eq 0 ]
+    then
+        echo "Installing curl"
+        sudo apt -y install curl
+    fi
+
     curl -L https://github.com/storj/storj/releases/latest/download/identity_linux_amd64.zip -o "${IDENTITY_EXECUTABLE_DIR}/identity_linux_amd64.zip"
     if [ $(dpkg-query -W -f='${Status}' unzip 2>/dev/null | grep -c "ok installed") -eq 0 ]
     then
