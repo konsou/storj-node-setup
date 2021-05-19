@@ -1,3 +1,5 @@
 identity/
 identity-executable/
+venv/
+__pycache__/
 docker-run.sh
