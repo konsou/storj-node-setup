@@ -10,6 +10,11 @@ IDENTITY_DIR=./identity
 CURRENT_IPS=$(hostname -I)
 
 echo
+echo "Update APT in case we need to install some packages"
+sudo apt update
+echo
+
+echo
 echo "BEFORE YOU BEGIN"
 echo
 echo "Identity - you need one of these:"
@@ -25,11 +30,6 @@ echo "It's better to generate an identity on your main computer."
 echo "Identity generation guide: https://documentation.storj.io/dependencies/identity"
 echo
 read -p "Generate identity now? (y/n): " USER_INPUT
-
-echo
-echo "Update APT in case we need to install some packages"
-sudo apt update
-echo
 
 if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" ]]
 then
