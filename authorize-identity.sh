@@ -23,6 +23,7 @@ echo "Authorizing Storj identity"
 echo
 echo "Creating directories if needed"
 mkdir -p "${IDENTITY_DIR}"
+mkdir -p ~/.local/share/storj/identity
 
 read -p "Enter auth token: " AUTH_TOKEN
 
