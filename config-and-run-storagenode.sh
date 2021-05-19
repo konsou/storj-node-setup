@@ -60,7 +60,7 @@ mv "${IDENTITY_DIR}" "${MOUNT_POINT}"
 docker pull storjlabs/storagenode:latest
 
 # GENERATE DOCKER SETUP SCRIPT
-DOCKER_SETUP_SCRIPT=./docker-run.sh
+DOCKER_SETUP_SCRIPT="${MOUNT_POINT}/docker-run.sh"
 # #!/bin/bash NEEDS TO BE IN SINGLE QUOTES TO WORK
 echo '#!/bin/bash' > "${DOCKER_SETUP_SCRIPT}"
 echo "docker run --rm -e SETUP='true' \\" >> "${DOCKER_SETUP_SCRIPT}"
@@ -77,7 +77,7 @@ read -p "PRESS ENTER TO CONTINUE IF THIS COMMAND LOOKS RIGHT. CTRL-C TO EXIT OTH
 
 
 # GENERATE DOCKER RUN SCRIPT
-DOCKER_RUN_SCRIPT=./docker-run.sh
+DOCKER_RUN_SCRIPT="${MOUNT_POINT}/docker-run.sh"
 # #!/bin/bash NEEDS TO BE IN SINGLE QUOTES TO WORK
 echo '#!/bin/bash' > "${DOCKER_RUN_SCRIPT}"
 echo "docker run -d --restart unless-stopped --stop-timeout 300 \\" >> "${DOCKER_RUN_SCRIPT}"
