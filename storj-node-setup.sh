@@ -35,7 +35,8 @@ if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" ]]
 then
         source ./generate-identity.sh
 else
-        read -p "Enter identity directory path: " IDENTITY_DIR
+        echo "Enter identity directory path: "
+        read -p  "(should contain a subdirectory called 'storagenode' that has your identity files): " IDENTITY_DIR
 fi
 
 echo "Using identity directory ${IDENTITY_DIR}"
