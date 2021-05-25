@@ -3,4 +3,4 @@ from typing import List
 
 
 def run_command(command: List[str]) -> str:
-    return str(check_output(command))
+    return check_output(command).decode('utf-8')
