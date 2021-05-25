@@ -20,6 +20,11 @@ find_python() {
         set -e
 }
 
+ask_manual_python_install_and_exit() {
+  echo "Please install Python 3.7 or newer manually to continue."
+  exit 1
+}
+
 set -e
 
 while true; do
@@ -32,19 +37,19 @@ while true; do
          set +e
          sudo apt update
          sudo apt install software-properties-common -y
-         sudo add-apt-repository ppa:deadsnakes/ppa
-         sudo apt update
-         INSTALL_RESULT=sudo apt install python3.9 -y
-         set -e
-         if [[ $INSTALL_RESULT -ne 0 ]]; then
-           echo "Error installing Python. "
-           echo "Please install Python 3.7 or newer manually to continue."
-           exit 1
+         if ! sudo add-apt-repository ppa:deadsnakes/ppa; then
+           ask_manual_python_install_and_exit
          fi
+         if ! sudo apt update; then
+           ask_manual_python_install_and_exit
+         fi
+         if ! sudo apt install python3.9 -y; then
+           ask_manual_python_install_and_exit
+         fi
+         set -e
          break
-       else
-         echo "Please install Python 3.7 or newer manually to continue."
-         exit 1
+       else  # user selected "no" for automatic Python install
+         ask_manual_python_install_and_exit
        fi
      done
 
