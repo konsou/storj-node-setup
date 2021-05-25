@@ -1,4 +1,7 @@
 import socket
+import urllib.request
+
+from urllib.error import URLError
 
 
 def get_local_primary_ip() -> str:
@@ -13,5 +16,15 @@ def get_local_primary_ip() -> str:
     return ip
 
 
+def get_public_ip() -> str:
+    external_ip_api_endpoint = 'https://api.ipify.org'
+
+    try:
+        return urllib.request.urlopen(external_ip_api_endpoint).read().decode('utf-8')
+    except (URLError, AttributeError, UnicodeDecodeError):
+        return ""
+
+
 if __name__ == '__main__':
     print(get_local_primary_ip())
+    print(get_public_ip())
