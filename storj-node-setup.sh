@@ -25,7 +25,7 @@ set -e
 while true; do
   find_python
   if [[ -z "$BEST_PYTHON_VERSION" ]]; then
-    echo "No valid Python 3 found - version >= 3.8 required."
+    echo "No valid Python 3 found - version >= 3.7 required."
      while true; do
        read -p "Install Python 3.9 from deadsnakes PPA? (Y/n): " USER_INPUT
        if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
@@ -36,7 +36,7 @@ while true; do
          sudo apt install python3.9 -y
          break
        else
-         echo "Please install Python 3.8 or newer manually to continue."
+         echo "Please install Python 3.7 or newer manually to continue."
          exit 1
        fi
      done
