@@ -1,8 +1,18 @@
+from tempfile import TemporaryDirectory
+
 from ip_address import get_local_primary_ip, get_public_ip
 from user_input import ask_user_yes_no
+from system import detect_os_bitness, detect_os_architecture
 
 
 def main():
+    print(f"Detect system...")
+    bitness = detect_os_bitness()
+    architecture = detect_os_architecture()
+    print(f"System is {architecture} {bitness}")
+
+    temp_dir: TemporaryDirectory = TemporaryDirectory(prefix='storj-node-setup')
+    print(f"Temp dir is {temp_dir}")
     mount_dir_base = "/mnt"
     print(f"Getting IP address info...")
     local_ip_address = get_local_primary_ip()
@@ -32,7 +42,6 @@ other hardware that's not powerful because it will take forever.
 It's better to generate an identity on your main computer.
 
 Identity generation guide: https://documentation.storj.io/dependencies/identity
-\
 """)
     generate_identity = ask_user_yes_no(prompt="Generate identity now?",
                                         default='n')
