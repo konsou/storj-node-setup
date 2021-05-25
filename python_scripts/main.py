@@ -11,7 +11,7 @@ def main():
     architecture = detect_os_architecture()
     print(f"System is {architecture} {bitness}")
 
-    temp_dir: TemporaryDirectory = TemporaryDirectory(prefix='storj-node-setup')
+    temp_dir: TemporaryDirectory = TemporaryDirectory(prefix='storj-node-setup-')
     print(f"Temp dir is {temp_dir}")
     mount_dir_base = "/mnt"
     print(f"Getting IP address info...")
