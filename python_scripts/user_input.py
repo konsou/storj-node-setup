@@ -1,4 +1,4 @@
-from typing import TypeVar, Callable, Optional, Sequence, Literal
+from typing import TypeVar, Callable, Optional, Sequence
 
 ReturnType = TypeVar("ReturnType")
 
@@ -36,7 +36,7 @@ def ask_user(prompt: str,
 
 
 def ask_user_yes_no(prompt: str,
-                    default: Literal['y', 'n'] = 'y'
+                    default: str = 'y'
                     ) -> bool:
     options_string = "(Y/n)" if default == 'y' else "(y/N)"
     user_input = ask_user(prompt=f"{prompt} {options_string}: ",
