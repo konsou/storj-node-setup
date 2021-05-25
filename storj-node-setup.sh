@@ -9,7 +9,7 @@
 find_python() {
         set +e
         unset BEST_PYTHON_VERSION
-        for V in 3.9 39 3.8 38; do
+        for V in 3.9 39 3.8 38 3.7 37; do
                 if which python$V >/dev/null; then
                         if [ x"$BEST_PYTHON_VERSION" = x ]; then
                                 BEST_PYTHON_VERSION=$V
