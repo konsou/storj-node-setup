@@ -1,4 +1,4 @@
-from typing import Type, TypeVar, Callable, Optional, Sequence
+from typing import TypeVar, Callable, Optional, Sequence, Literal
 
 ReturnType = TypeVar("ReturnType")
 
@@ -7,9 +7,13 @@ def ask_user(prompt: str,
              valid_type: Callable[[str], ReturnType],
              valid_literal_values: Sequence[ReturnType] = None,
              default_value: Optional[ReturnType] = None,
+             convert_to_lower: bool = False,
              ) -> ReturnType:
     while True:
         user_input = input(prompt).strip()
+
+        if convert_to_lower:
+            user_input = user_input.lower()
 
         if default_value is not None:
             if not user_input:
@@ -29,6 +33,18 @@ def ask_user(prompt: str,
                 continue
 
         return user_input
+
+
+def ask_user_yes_no(prompt: str,
+                    default: Literal['y', 'n'] = 'y'
+                    ) -> bool:
+    options_string = "(Y/n)" if default == 'y' else "(y/N)"
+    user_input = ask_user(prompt=f"{prompt} {options_string}: ",
+                          valid_type=str,
+                          valid_literal_values=("y", "n"),
+                          default_value=default,
+                          convert_to_lower=True)
+    return True if user_input == 'y' else False
 
 
 if __name__ == '__main__':
