@@ -29,11 +29,18 @@ while true; do
      while true; do
        read -p "Install Python 3.9 from deadsnakes PPA? (Y/n): " USER_INPUT
        if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
+         set +e
          sudo apt update
          sudo apt install software-properties-common -y
          sudo add-apt-repository ppa:deadsnakes/ppa
          sudo apt update
-         sudo apt install python3.9 -y
+         INSTALL_RESULT=sudo apt install python3.9 -y
+         set -e
+         if [[ $INSTALL_RESULT -ne 0 ]]; then
+           echo "Error installing Python. "
+           echo "Please install Python 3.7 or newer manually to continue."
+           exit 1
+         fi
          break
        else
          echo "Please install Python 3.7 or newer manually to continue."
