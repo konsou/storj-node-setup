@@ -29,6 +29,8 @@ while true; do
      while true; do
        read -p "Install Python 3.9 from deadsnakes PPA? (Y/n): " USER_INPUT
        if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
+         sudo apt update
+         sudo apt install software-properties-common -y
          sudo add-apt-repository ppa:deadsnakes/ppa
          sudo apt update
          sudo apt install python3.9 -y
