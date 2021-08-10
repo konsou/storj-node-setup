@@ -79,13 +79,16 @@ while true; do
   fi
 done
 
-# TODO: Check if install is needed
-read -r -p "Install prerequisite packages? (python3-pip) (Y/n): " USER_INPUT
-if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
-  sudo apt install python3-pip -y
-else
-  ask_manual_python_install_and_exit
+if [ "$(dpkg-query -W -f='${Status}' python3-pip 2>/dev/null | grep -c "ok installed")" -eq 0 ];
+then
+  read -r -p "Install prerequisite packages? (python3-pip) (Y/n): " USER_INPUT
+  if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
+    sudo apt install python3-pip -y
+  else
+    ask_manual_python_install_and_exit
+  fi
 fi
+
 
 # Install required python packages
 "${PYTHON_EXECUTABLE}" -m pip install -r requirements.txt
