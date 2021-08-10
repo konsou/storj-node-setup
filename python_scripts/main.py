@@ -70,10 +70,12 @@ Identity generation guide: https://documentation.storj.io/dependencies/identity
             valid_type=str)
         identity_source_location = os.path.expanduser(identity_source_location)  # expand "~"
 
-    identity_authorized = identity_is_authorized(identity_source_location)
-    print(f"Identity authorized: {identity_authorized}")
+    while True:
+        identity_authorized = identity_is_authorized(identity_source_location)
+        print(f"Identity authorized: {identity_authorized}")
+        if identity_authorized:
+            break
 
-    if not identity_authorized:
         if ask_user_yes_no("Authorize the identity now?"):
             auth_token = ask_user("Enter authorization token: ", valid_type=str)
             authorize_identity(identity_dir=identity_source_location,
@@ -82,6 +84,8 @@ Identity generation guide: https://documentation.storj.io/dependencies/identity
         else:
             print(f"Need an authorized identity to continue. Quitting.")
             sys.exit(1)
+
+
 
 
 if __name__ == '__main__':
