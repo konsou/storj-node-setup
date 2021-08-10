@@ -56,13 +56,13 @@ def download_identity_executable(url: str,
 def identity_is_authorized(identity_dir: Path) -> bool:
     identity_dir = os.path.expanduser(identity_dir)  # expand "~"
 
-    with open(f"{identity_dir}/ca.cert", encoding='utf-8') as f:
+    with open(f"{identity_dir}/storagenode/ca.cert", encoding='utf-8') as f:
         ca_cert = f.read()
 
     if ca_cert.count("BEGIN") != 2:
         return False
 
-    with open(f"{identity_dir}/identity.cert", encoding='utf-8') as f:
+    with open(f"{identity_dir}/storagenode/identity.cert", encoding='utf-8') as f:
         identity_cert = f.read()
 
     if identity_cert.count("BEGIN") != 3:
