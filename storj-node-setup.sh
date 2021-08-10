@@ -30,30 +30,49 @@ ask_manual_python_install_and_exit() {
 
 set -e
 
+TRIED_APT_INSTALL_PYTHON=0
+
 while true; do
   find_python
   if [[ -z "$BEST_PYTHON_VERSION" ]]; then
     echo "No valid Python 3 found - version >= 3.7 required."
-     while true; do
-       read -r -p "Install Python 3.9 from deadsnakes PPA? (Y/n): " USER_INPUT
-       if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
-         set +e
-         sudo apt install software-properties-common -y
-         if ! sudo add-apt-repository ppa:deadsnakes/ppa; then
+    if [[ $TRIED_APT_INSTALL_PYTHON -eq 0 ]]; then
+      read -r -p "Install Python 3.7 using apt? (Y/n): " USER_INPUT
+      if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
+        if ! sudo apt install python3.7 -y; then
+          TRIED_APT_INSTALL_PYTHON=1
+        else
+          break
+        fi
+
+      else
+        # User didn't want to automatically install Python 3.7
+        ask_manual_python_install_and_exit
+      fi
+
+     # Already tried to install Python 3.7 using apt
+     else
+       while true; do
+         read -r -p "Install Python 3.9 from deadsnakes PPA? (Y/n): " USER_INPUT
+         if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
+           set +e
+           sudo apt install software-properties-common -y
+           if ! sudo add-apt-repository ppa:deadsnakes/ppa; then
+             ask_manual_python_install_and_exit
+           fi
+           if ! sudo apt update; then
+             ask_manual_python_install_and_exit
+           fi
+           if ! sudo apt install python3.9 -y; then
+             ask_manual_python_install_and_exit
+           fi
+           set -e
+           break
+         else  # user selected "no" for automatic Python install
            ask_manual_python_install_and_exit
          fi
-         if ! sudo apt update; then
-           ask_manual_python_install_and_exit
-         fi
-         if ! sudo apt install python3.9 -y; then
-           ask_manual_python_install_and_exit
-         fi
-         set -e
-         break
-       else  # user selected "no" for automatic Python install
-         ask_manual_python_install_and_exit
-       fi
-     done
+       done
+     fi
 
   else
     echo "Using Python ${BEST_PYTHON_VERSION}"
