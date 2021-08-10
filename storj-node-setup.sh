@@ -90,7 +90,7 @@ else
 fi
 
 # Install required python packages
-pip3 install -r requirements.txt
+"${PYTHON_EXECUTABLE}" -m pip install -r requirements.txt
 
 # Start the Python main script
 "${PYTHON_EXECUTABLE}" ./python_scripts/main.py
