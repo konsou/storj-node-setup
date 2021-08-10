@@ -50,7 +50,7 @@ if __name__ == '__main__':
     URL = identity_download_url()
     print(URL)
     dest = download_identity_executable(url=URL,
-                                        destination_dir='c:\\temp')
+                                        destination_dir='/tmp')
     print(dest)
 
 
