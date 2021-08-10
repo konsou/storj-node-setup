@@ -4,6 +4,8 @@
 
 sudo apt update
 
+# TODO: USE venv
+
 
 # find_python function copied from chia-blockchain
 # https://github.com/Chia-Network/chia-blockchain
