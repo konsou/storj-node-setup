@@ -41,8 +41,6 @@ while true; do
       if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
         if ! sudo apt install python3.7 -y; then
           TRIED_APT_INSTALL_PYTHON=1
-        else
-          break
         fi
 
       else
@@ -51,7 +49,7 @@ while true; do
       fi
 
      # Already tried to install Python 3.7 using apt
-     else
+    else
        while true; do
          read -r -p "Install Python 3.9 from deadsnakes PPA? (Y/n): " USER_INPUT
          if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
