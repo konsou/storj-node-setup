@@ -64,7 +64,7 @@ Identity generation guide: https://documentation.storj.io/dependencies/identity
         identity_source_location = ask_user(
             "Please enter a directory to copy the identity files from."
             "\nNote: this directory should have a subdirectory called 'storagenode' "
-            "\nthat contains the actual identity files."
+            "\n      that contains the actual identity files."
             "\nIdentity directory:  ",
             valid_type=str)
         identity_source_location = os.path.expanduser(identity_source_location)  # expand "~"
