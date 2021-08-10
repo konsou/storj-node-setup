@@ -30,17 +30,18 @@ def main():
 BEFORE YOU BEGIN
 
 CONNECTIVITY
-  -your server must have a static IP set 
-  -Storj port must have been opened and redirected to this machine in the router
-    -docs: https://docs.storj.io/node/dependencies/port-forwarding
-  -current local IP: {local_ip_address}
-  -current public IP: {public_ip_address if public_ip_address else '(unknown)'}
+  - your server must have a static IP set 
+  - Storj port must have been opened and redirected to this machine in the router
+    * docs: https://docs.storj.io/node/dependencies/port-forwarding
+  - current local IP: {local_ip_address}
+  - current public IP: {public_ip_address if public_ip_address else '(unknown)'}
 
 
 IDENTITY 
-  -you need one of these:
-    -an auth token from https://registration.storj.io/ OR
-    -an authorized identity
+  - you need one of these:
+    * an auth token from https://registration.storj.io/ OR
+    * an auth token and an unauthorized identity OR
+    * an authorized identity
 
 It's not a good idea to generate an identity on a Raspberry Pi or
 other hardware that's not powerful because it will take forever.
