@@ -5,7 +5,7 @@ import sys
 from ip_address import get_local_primary_ip, get_public_ip
 from user_input import ask_user_yes_no, ask_user
 from system import system
-from identity import identity_is_authorized
+from identity import identity_is_authorized, authorize_identity
 
 
 def main():
@@ -71,6 +71,16 @@ Identity generation guide: https://documentation.storj.io/dependencies/identity
 
     identity_authorized = identity_is_authorized(identity_source_location)
     print(f"Identity authorized: {identity_authorized}")
+
+    if not identity_authorized:
+        if ask_user_yes_no("Authorize the identity now?"):
+            auth_token = ask_user("Enter authorization token: ", valid_type=str)
+            authorize_identity(identity_dir=identity_source_location,
+                               auth_token=auth_token,
+                               temp_dir=temp_dir)
+        else:
+            print(f"Need an authorized identity to continue. Quitting.")
+            sys.exit(1)
 
 
 if __name__ == '__main__':
