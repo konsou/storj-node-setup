@@ -38,8 +38,11 @@ def download_identity_executable(url: str,
     """Download the identity executable to given directory.
     Return the full file name for the downloaded executable."""
 
+    print(f"Type of destination_dir is {type(destination_dir)}")
     if type(destination_dir) == type(TemporaryDirectory):
+        print("Converting...")
         destination_dir = destination_dir.name
+        print(f"Type of destination_dir is {type(destination_dir)}")
 
     destination_filename = os.path.join(destination_dir, 'identity')
 
@@ -82,7 +85,9 @@ def authorize_identity(identity_dir: Path,
                        temp_dir: Path = None):
     """identity_dir should have a subdir 'storagenode' that contains the identity files"""
     if identity_executable_path is None:
+        print(f"No identity_executable_path set")
         if temp_dir is None:
+            print(f"No temp_dir set - getting a new one...")
             temp_dir = TemporaryDirectory(prefix='storj-node-setup-')
         identity_executable_path = download_identity_executable(url=identity_download_url(),
                                                                 destination_dir=temp_dir)
@@ -92,7 +97,12 @@ def authorize_identity(identity_dir: Path,
 
 if __name__ == '__main__':
     id_dir = input("Check this identity dir if it's authorized: ")
-    print(identity_is_authorized(id_dir))
+    authorized = identity_is_authorized(id_dir)
+    if not authorized:
+        token = input("Auth token: ")
+        authorize_identity(identity_dir=id_dir,
+                           auth_token=token,
+                           )
 
 
 
