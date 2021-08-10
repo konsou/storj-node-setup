@@ -39,7 +39,7 @@ def download_identity_executable(url: str,
     Return the full file name for the downloaded executable."""
 
     print(f"Type of destination_dir is {type(destination_dir)}")
-    if type(destination_dir) == type(TemporaryDirectory):
+    if isinstance(destination_dir, TemporaryDirectory):
         print("Converting...")
         destination_dir = destination_dir.name
         print(f"Type of destination_dir is {type(destination_dir)}")
