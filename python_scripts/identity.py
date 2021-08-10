@@ -54,6 +54,8 @@ def download_identity_executable(url: str,
 
 
 def identity_is_signed(identity_dir: Path) -> bool:
+    identity_dir = os.path.expanduser(identity_dir)  # expand "~"
+
     with open(f"{identity_dir}/ca.cert", encoding='utf-8') as f:
         ca_cert = f.read()
 
