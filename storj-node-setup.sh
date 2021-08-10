@@ -62,7 +62,7 @@ while true; do
   fi
 done
 
-
+# TODO: Check if install is needed
 read -r -p "Install prerequisite packages? (python3-pip) (Y/n): " USER_INPUT
 if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
   sudo apt install python3-pip -y
