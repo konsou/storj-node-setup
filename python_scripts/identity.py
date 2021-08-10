@@ -53,7 +53,7 @@ def download_identity_executable(url: str,
     return destination_filename
 
 
-def identity_is_signed(identity_dir: Path) -> bool:
+def identity_is_authorized(identity_dir: Path) -> bool:
     identity_dir = os.path.expanduser(identity_dir)  # expand "~"
 
     with open(f"{identity_dir}/ca.cert", encoding='utf-8') as f:
@@ -73,7 +73,7 @@ def identity_is_signed(identity_dir: Path) -> bool:
 
 if __name__ == '__main__':
     id_dir = input("Check this identity dir if it's authorized: ")
-    print(identity_is_signed(id_dir))
+    print(identity_is_authorized(id_dir))
 
 
 
