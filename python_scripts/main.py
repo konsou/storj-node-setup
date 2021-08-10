@@ -1,9 +1,11 @@
+import os.path
 from tempfile import TemporaryDirectory
 import sys
 
 from ip_address import get_local_primary_ip, get_public_ip
-from user_input import ask_user_yes_no
+from user_input import ask_user_yes_no, ask_user
 from system import system
+from identity import identity_is_authorized
 
 
 def main():
@@ -49,10 +51,26 @@ Identity generation guide: https://documentation.storj.io/dependencies/identity
     generate_identity = ask_user_yes_no(prompt="Generate identity now?",
                                         default='n')
 
+    identity_source_location = None
+
     if generate_identity:
         print('Generating identity')
+        # TODO
+        # set identity location here
     else:
         print('Not generating identity')
+
+    if not identity_source_location:
+        identity_source_location = ask_user(
+"Please enter the directory to copy the identity files from."
+"\nNote: this directory should have a subdirectory called 'storagenode' that contains the actual identity files"
+"\n :  ",
+                                            valid_type=str)
+        identity_source_location = os.path.expanduser(identity_source_location)  # expand "~"
+
+    identity_authorized = identity_is_authorized(identity_source_location)
+    print(f"Identity authorized: {identity_authorized}")
+
 
 
 if __name__ == '__main__':
