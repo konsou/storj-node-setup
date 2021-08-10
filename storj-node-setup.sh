@@ -2,6 +2,9 @@
 # RUN THIS SCRIPT AS A NORMAL USER
 # WILL SUDO WHEN NEEDED
 
+sudo apt update
+
+
 # find_python function copied from chia-blockchain
 # https://github.com/Chia-Network/chia-blockchain
 # Copyright 2021 Chia Network
@@ -21,7 +24,7 @@ find_python() {
 }
 
 ask_manual_python_install_and_exit() {
-  echo "Please install Python 3.7 or newer manually to continue."
+  echo "Please install Python 3.7 or newer and python3-pip manually to continue."
   exit 1
 }
 
@@ -32,10 +35,9 @@ while true; do
   if [[ -z "$BEST_PYTHON_VERSION" ]]; then
     echo "No valid Python 3 found - version >= 3.7 required."
      while true; do
-       read -p "Install Python 3.9 from deadsnakes PPA? (Y/n): " USER_INPUT
+       read -r -p "Install Python 3.9 from deadsnakes PPA? (Y/n): " USER_INPUT
        if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
          set +e
-         sudo apt update
          sudo apt install software-properties-common -y
          if ! sudo add-apt-repository ppa:deadsnakes/ppa; then
            ask_manual_python_install_and_exit
@@ -59,6 +61,14 @@ while true; do
     break
   fi
 done
+
+
+read -r -p "Install prerequisite packages? (python3-pip) (Y/n): " USER_INPUT
+if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
+  sudo apt install python3-pip -y
+else
+  ask_manual_python_install_and_exit
+fi
 
 
 # Start the Python main script
