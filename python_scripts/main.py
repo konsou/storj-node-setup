@@ -2,6 +2,8 @@ import os.path
 from tempfile import TemporaryDirectory
 import sys
 
+import distro
+
 from ip_address import get_local_primary_ip, get_public_ip
 from user_input import ask_user_yes_no, ask_user
 from system import system
@@ -15,6 +17,7 @@ def main():
         print(f"{operating_environment.os} is not supported. This script only runs on Linux.")
         sys.exit(1)
     print(f"System is {operating_environment.os} {operating_environment.architecture} {operating_environment.bitness}")
+    print(f"Distro is {distro.id()}")
 
     temp_dir: TemporaryDirectory = TemporaryDirectory(prefix='storj-node-setup-')
     print(f"Temp dir is {temp_dir.name}")
@@ -84,6 +87,8 @@ Identity generation guide: https://documentation.storj.io/dependencies/identity
         else:
             print(f"Need an authorized identity to continue. Quitting.")
             sys.exit(1)
+
+    # setup
 
 
 
