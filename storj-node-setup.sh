@@ -87,6 +87,8 @@ then
   else
     ask_manual_python_install_and_exit
   fi
+else
+  echo "pip3 is already installed"
 fi
 
 
