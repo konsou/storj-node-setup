@@ -53,12 +53,25 @@ def download_identity_executable(url: str,
     return destination_filename
 
 
+def identity_is_signed(identity_dir: Path) -> bool:
+    with open(f"{identity_dir}/ca.cert", encoding='utf-8') as f:
+        ca_cert = f.read()
+
+    if ca_cert.count("BEGIN") != 2:
+        return False
+
+    with open(f"{identity_dir}/identity.cert", encoding='utf-8') as f:
+        identity_cert = f.read()
+
+    if identity_cert.count("BEGIN") != 3:
+        return False
+
+    return True
+
+
 if __name__ == '__main__':
-    URL = identity_download_url()
-    print(URL)
-    dest = download_identity_executable(url=URL,
-                                        destination_dir='/tmp')
-    print(dest)
+    id_dir = input("Check this identity dir if it's authorized: ")
+    print(identity_is_signed(id_dir))
 
 
 
