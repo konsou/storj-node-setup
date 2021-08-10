@@ -1,4 +1,5 @@
 from tempfile import TemporaryDirectory
+import sys
 
 from ip_address import get_local_primary_ip, get_public_ip
 from user_input import ask_user_yes_no
@@ -8,6 +9,9 @@ from system import system
 def main():
     print(f"Detect system...")
     operating_environment = system()
+    if operating_environment.os != "Linux":
+        print(f"{operating_environment.os} is not supported. This script only runs on Linux.")
+        sys.exit(1)
     print(f"System is {operating_environment}")
 
     temp_dir: TemporaryDirectory = TemporaryDirectory(prefix='storj-node-setup-')
