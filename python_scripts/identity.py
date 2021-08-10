@@ -5,7 +5,23 @@ import zipfile
 
 from typing import Union
 
+from system import system
+
 Path = Union[str, os.PathLike]
+
+
+def identity_download_url() -> str:
+    download_locations = {
+        ("Linux", "armv6l", "32bit"): "https://github.com/storj/storj/releases/latest/download/identity_linux_arm.zip",
+        ("Linux", "armv6l", "64bit"): "https://github.com/storj/storj/releases/latest/download/identity_linux_arm64.zip",
+        ("Linux", "x86_64", "64bit"): "https://github.com/storj/storj/releases/latest/download/identity_linux_amd64.zip",
+        # ("Windows", "AMD64", "64bit"): "https://github.com/storj/storj/releases/latest/download/identity_windows_amd64.zip",
+    }
+    current_system = system()
+    try:
+        return download_locations[current_system]
+    except KeyError:
+        raise EnvironmentError(f"Unknown or unsupported system: {current_system}")
 
 
 def download_identity_executable(url: str,
@@ -31,9 +47,10 @@ def download_identity_executable(url: str,
 
 
 if __name__ == '__main__':
-    URL = "https://github.com/storj/storj/releases/latest/download/identity_linux_amd64.zip"
+    URL = identity_download_url()
+    print(URL)
     dest = download_identity_executable(url=URL,
-                                        destination_dir='z:\\')
+                                        destination_dir='c:\\temp')
     print(dest)
 
 
