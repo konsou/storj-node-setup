@@ -9,6 +9,8 @@ from user_input import ask_user_yes_no, ask_user
 from system import system
 from identity import identity_is_authorized, authorize_identity
 
+SUPPORTED_DISTROS = ["ubuntu", "debian", "raspbian"]
+
 
 def main():
     print(f"Detect system...")
@@ -17,7 +19,15 @@ def main():
         print(f"{operating_environment.os} is not supported. This script only runs on Linux.")
         sys.exit(1)
     print(f"System is {operating_environment.os} {operating_environment.architecture} {operating_environment.bitness}")
-    print(f"Distro is {distro.id()}")
+    current_distro = distro.id()
+    print(f"Distro is {current_distro}")
+    if current_distro not in SUPPORTED_DISTROS:
+        print(f"{current_distro} is not officially supported for this script!")
+        print(f"Supported distros are:")
+        for d in SUPPORTED_DISTROS:
+            print(f"    * {d}")
+        print(f"Things might work or not. Press ENTER to continue, Ctrl-C to exit.")
+        input()
 
     temp_dir: TemporaryDirectory = TemporaryDirectory(prefix='storj-node-setup-')
     print(f"Temp dir is {temp_dir.name}")
