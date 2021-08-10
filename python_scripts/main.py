@@ -2,14 +2,13 @@ from tempfile import TemporaryDirectory
 
 from ip_address import get_local_primary_ip, get_public_ip
 from user_input import ask_user_yes_no
-from system import detect_os_bitness, detect_os_architecture
+from system import system
 
 
 def main():
     print(f"Detect system...")
-    bitness = detect_os_bitness()
-    architecture = detect_os_architecture()
-    print(f"System is {architecture} {bitness}")
+    operating_environment = system()
+    print(f"System is {operating_environment}")
 
     temp_dir: TemporaryDirectory = TemporaryDirectory(prefix='storj-node-setup-')
     print(f"Temp dir is {temp_dir}")
