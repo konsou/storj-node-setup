@@ -14,10 +14,10 @@ def main():
     if operating_environment.os != "Linux":
         print(f"{operating_environment.os} is not supported. This script only runs on Linux.")
         sys.exit(1)
-    print(f"System is {operating_environment}")
+    print(f"System is {operating_environment.os} {operating_environment.architecture} {operating_environment.bitness}")
 
     temp_dir: TemporaryDirectory = TemporaryDirectory(prefix='storj-node-setup-')
-    print(f"Temp dir is {temp_dir}")
+    print(f"Temp dir is {temp_dir.name}")
     mount_dir_base = "/mnt"
     print(f"Getting IP address info...")
     local_ip_address = get_local_primary_ip()
