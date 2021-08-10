@@ -23,7 +23,6 @@ def identity_download_url() -> str:
         ("Linux", "armv6l", "32bit"): "https://github.com/storj/storj/releases/latest/download/identity_linux_arm.zip",
         ("Linux", "armv6l", "64bit"): "https://github.com/storj/storj/releases/latest/download/identity_linux_arm64.zip",
         ("Linux", "x86_64", "64bit"): "https://github.com/storj/storj/releases/latest/download/identity_linux_amd64.zip",
-        # ("Windows", "AMD64", "64bit"): "https://github.com/storj/storj/releases/latest/download/identity_windows_amd64.zip",
     }
     current_system = system()
     try:
@@ -38,11 +37,10 @@ def download_identity_executable(url: str,
     """Download the identity executable to given directory.
     Return the full file name for the downloaded executable."""
 
-    print(f"Type of destination_dir is {type(destination_dir)}")
     if isinstance(destination_dir, TemporaryDirectory):
-        print("Converting...")
         destination_dir = destination_dir.name
-        print(f"Type of destination_dir is {type(destination_dir)}")
+
+    destination_dir = os.path.expanduser(destination_dir)
 
     destination_filename = os.path.join(destination_dir, 'identity')
 
@@ -91,8 +89,13 @@ def authorize_identity(identity_dir: Path,
         if temp_dir is None:
             print(f"No temp_dir set - getting a new one...")
             temp_dir = TemporaryDirectory(prefix='storj-node-setup-')
+        else:
+            temp_dir = os.path.expanduser(temp_dir)
+
         identity_executable_path = download_identity_executable(url=identity_download_url(),
                                                                 destination_dir=temp_dir)
+
+    identity_executable_path = os.path.expanduser(identity_executable_path)
 
     check_call([identity_executable_path, "authorize", "storagenode", auth_token, "--identity-dir", identity_dir])
 
