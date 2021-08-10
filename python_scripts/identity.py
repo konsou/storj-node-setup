@@ -37,6 +37,10 @@ def download_identity_executable(url: str,
                                  ) -> Path:
     """Download the identity executable to given directory.
     Return the full file name for the downloaded executable."""
+
+    if type(destination_dir) == type(TemporaryDirectory):
+        destination_dir = destination_dir.name
+
     destination_filename = os.path.join(destination_dir, 'identity')
 
     print(f"Downloading identity executable from {url}...")
