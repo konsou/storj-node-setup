@@ -84,6 +84,8 @@ def authorize_identity(identity_dir: Path,
                        identity_executable_path: Path = None,
                        temp_dir: Path = None):
     """identity_dir should have a subdir 'storagenode' that contains the identity files"""
+    identity_dir = os.path.expanduser(identity_dir)
+
     if identity_executable_path is None:
         print(f"No identity_executable_path set")
         if temp_dir is None:
