@@ -62,15 +62,15 @@ Identity generation guide: https://documentation.storj.io/dependencies/identity
 
     if not identity_source_location:
         identity_source_location = ask_user(
-"Please enter the directory to copy the identity files from."
-"\nNote: this directory should have a subdirectory called 'storagenode' that contains the actual identity files"
-"\n :  ",
-                                            valid_type=str)
+            "Please enter a directory to copy the identity files from."
+            "\nNote: this directory should have a subdirectory called 'storagenode' "
+            "\nthat contains the actual identity files"
+            "\n :  ",
+            valid_type=str)
         identity_source_location = os.path.expanduser(identity_source_location)  # expand "~"
 
     identity_authorized = identity_is_authorized(identity_source_location)
     print(f"Identity authorized: {identity_authorized}")
-
 
 
 if __name__ == '__main__':
