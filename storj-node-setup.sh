@@ -70,6 +70,8 @@ else
   ask_manual_python_install_and_exit
 fi
 
+# Install required python packages
+pip3 install -r requirements.txt
 
 # Start the Python main script
 "${PYTHON_EXECUTABLE}" ./python_scripts/main.py
