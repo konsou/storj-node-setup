@@ -9,6 +9,13 @@ from system import system
 
 Path = Union[str, os.PathLike]
 
+# NOTES
+# identity authorization command example:
+# identity authorize storagenode <token> --identity-dir /home/konso/storagenode_signed/
+# THE DIRECTORY SHOULD HAVE A SUBDIRECTORY NAMED "storagenode" THAT CONTAINS THE IDENTITY FILES
+#
+# REMEMBER TO CREATE THE DIRECTORY /home/(user)/.local/share/storj/identity/ !!
+
 
 def identity_download_url() -> str:
     download_locations = {
