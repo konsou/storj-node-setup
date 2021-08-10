@@ -4,10 +4,11 @@ import stat
 import zipfile
 
 from typing import Union
-
 from system import system
+from tempfile import TemporaryDirectory
+from subprocess import check_call
 
-Path = Union[str, os.PathLike]
+Path = Union[str, os.PathLike, TemporaryDirectory]
 
 # NOTES
 # identity authorization command example:
@@ -69,6 +70,20 @@ def identity_is_authorized(identity_dir: Path) -> bool:
         return False
 
     return True
+
+
+def authorize_identity(identity_dir: Path,
+                       auth_token: str,
+                       identity_executable_path: Path = None,
+                       temp_dir: Path = None):
+    """identity_dir should have a subdir 'storagenode' that contains the identity files"""
+    if identity_executable_path is None:
+        if temp_dir is None:
+            temp_dir = TemporaryDirectory(prefix='storj-node-setup-')
+        identity_executable_path = download_identity_executable(url=identity_download_url(),
+                                                                destination_dir=temp_dir)
+
+    check_call([identity_executable_path, "authorize", "storagenode", auth_token, "--identity-dir", identity_dir])
 
 
 if __name__ == '__main__':
