@@ -10,6 +10,7 @@ echo "    * python3-pip"
 echo "    * docker (removing old versions, adding the docker repository if applicable)"
 echo
 echo "Press ENTER to continue if this is ok - otherwise press Ctrl-C to exit"
+read
 
 echo "Installing prerequisites..."
 sudo apt update
