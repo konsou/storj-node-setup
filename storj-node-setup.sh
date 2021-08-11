@@ -50,40 +50,26 @@ while true; do
   if [[ -z "$BEST_PYTHON_VERSION" ]]; then
     echo "No valid Python 3 found - version >= 3.7 required."
     if [[ $TRIED_APT_INSTALL_PYTHON -eq 0 ]]; then
-      read -r -p "Install Python 3.7 using apt? (Y/n): " USER_INPUT
-      if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
-        if ! sudo apt install python3.7 -y; then
-          TRIED_APT_INSTALL_PYTHON=1
-        fi
-
-      else
-        # User didn't want to automatically install Python 3.7
-        ask_manual_python_install_and_exit
+      if ! sudo apt install python3.7 -y; then
+        TRIED_APT_INSTALL_PYTHON=1
       fi
+
 
      # Already tried to install Python 3.7 using apt
     else
-       while true; do
-         read -r -p "Install Python 3.9 from deadsnakes PPA? (Y/n): " USER_INPUT
-         if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
-           set +e
-           sudo apt install software-properties-common -y
-           if ! sudo add-apt-repository ppa:deadsnakes/ppa; then
-             ask_manual_python_install_and_exit
-           fi
-           if ! sudo apt update; then
-             ask_manual_python_install_and_exit
-           fi
-           if ! sudo apt install python3.9 -y; then
-             ask_manual_python_install_and_exit
-           fi
-           set -e
-           break
-         else  # user selected "no" for automatic Python install
-           ask_manual_python_install_and_exit
-         fi
-       done
+     set +e
+     sudo apt install software-properties-common -y
+     if ! sudo add-apt-repository ppa:deadsnakes/ppa; then
+       ask_manual_python_install_and_exit
      fi
+     if ! sudo apt update; then
+       ask_manual_python_install_and_exit
+     fi
+     if ! sudo apt install python3.9 -y; then
+       ask_manual_python_install_and_exit
+     fi
+     set -e
+   fi
 
   else
     echo "Using Python ${BEST_PYTHON_VERSION}"
@@ -94,14 +80,9 @@ done
 
 if [ "$(dpkg-query -W -f='${Status}' python3-pip 2>/dev/null | grep -c "ok installed")" -eq 0 ];
 then
-  read -r -p "Install prerequisite packages? (python3-pip) (Y/n): " USER_INPUT
-  if [[ "${USER_INPUT}" == "y" || "${USER_INPUT}" == "Y" || "${USER_INPUT}" == "" ]]; then
-    sudo apt install python3-pip -y
-  else
-    ask_manual_python_install_and_exit
-  fi
+  sudo apt install python3-pip -y
 else
-  echo "pip3 is already installed"
+  echo "python3-pip is already installed"
 fi
 
 
