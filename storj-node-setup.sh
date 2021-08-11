@@ -2,9 +2,19 @@
 # RUN THIS SCRIPT AS A NORMAL USER
 # WILL SUDO WHEN NEEDED
 
+echo "NOTE: This script will install the following:"
+echo
+echo "    * python3.7 using apt"
+echo "      * if the previous fails: python3.9, adding the Deadsnakes Python repository"
+echo "    * python3-pip"
+echo "    * docker (removing old versions, adding the docker repository if applicable)"
+echo
+echo "Press ENTER to continue if this is ok - otherwise press Ctrl-C to exit"
+
+echo "Installing prerequisites..."
 sudo apt update
 
-# TODO: USE venv
+# TODO: USE venv?
 
 
 # find_python function copied from chia-blockchain
